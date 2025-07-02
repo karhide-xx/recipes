@@ -6,32 +6,90 @@
   <style>
     body { font-family: sans-serif; margin: 2em; }
     h1 { color: #2c3e50; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 1em 0; }
-    a { text-decoration: none; color: #2980b9; }
-    a:hover { text-decoration: underline; }
-    img { max-width: 100px; vertical-align: middle; margin-right: 1em; }
+    .filter-box {
+      margin-bottom: 2em;
+      padding: 0.5em;
+      font-size: 1em;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2em;
+      padding: 0;
+      list-style: none;
+    }
+    .card {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1em;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .card img {
+      max-width: 100%;
+      max-height: 120px;
+      margin-bottom: 1em;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .card-title {
+      font-size: 1.1em;
+      margin: 0.5em 0;
+      color: #2980b9;
+      text-decoration: none;
+      display: block;
+    }
+    .external-link {
+      font-size: 0.9em;
+      margin-left: 0.5em;
+    }
   </style>
 </head>
 <body>
   <h1>All Recipes</h1>
-  <ul id="recipe-list"></ul>
+  <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title...">
+  <ul id="recipe-list" class="grid"></ul>
   <script>
+    let allRecipes = [];
+
+    function renderRecipes(recipes) {
+      const list = document.getElementById('recipe-list');
+      list.innerHTML = '';
+      recipes.forEach(recipe => {
+        const li = document.createElement('li');
+        li.className = 'card';
+        let img = recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : '';
+        let link = `<a class="card-title" href="recipe.html?id=${recipe.id}">${recipe.title}</a>`;
+        let external = recipe.link ? `<a class="external-link" href="${recipe.link}" target="_blank" title="External link">[source]</a>` : '';
+        li.innerHTML = img + link + external;
+        list.appendChild(li);
+      });
+    }
+
     fetch('recipes.json')
       .then(res => res.json())
       .then(recipes => {
-        const list = document.getElementById('recipe-list');
-        recipes.forEach(recipe => {
-          const li = document.createElement('li');
-          let img = recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : '';
-          let link = `<a href="recipe.html?id=${recipe.id}">${recipe.title}</a>`;
-          if (recipe.link) {
-            link += ` <a href="${recipe.link}" target="_blank" style="font-size:0.9em;">[external]</a>`;
-          }
-          li.innerHTML = img + link;
-          list.appendChild(li);
-        });
+        allRecipes = recipes;
+        renderRecipes(allRecipes);
       });
+
+    document.getElementById('filter').addEventListener('input', function() {
+      const value = this.value.trim().toLowerCase();
+      renderRecipes(
+        allRecipes.filter(recipe =>
+          recipe.title.toLowerCase().includes(value)
+        )
+      );
+    });
   </script>
 </body>
 </html>
