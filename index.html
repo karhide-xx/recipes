@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Recipe Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: sans-serif; margin: 2em; }
     h1 { color: #2c3e50; }
@@ -14,6 +15,7 @@
       max-width: 400px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      box-sizing: border-box;
     }
     .grid {
       display: grid;
@@ -30,6 +32,9 @@
       text-align: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       transition: box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .card:hover {
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -40,6 +45,8 @@
       margin-bottom: 1em;
       border-radius: 4px;
       object-fit: cover;
+      width: 100%;
+      height: auto;
     }
     .card-title {
       font-size: 1.1em;
@@ -47,10 +54,18 @@
       color: #2980b9;
       text-decoration: none;
       display: block;
+      word-break: break-word;
     }
     .external-link {
       font-size: 0.9em;
       margin-left: 0.5em;
+      word-break: break-word;
+    }
+    @media (max-width: 600px) {
+      body { margin: 1em; }
+      .grid { gap: 1em; }
+      .card { padding: 0.5em; }
+      .card img { max-height: 80px; }
     }
   </style>
 </head>
