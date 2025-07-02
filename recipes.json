@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "Carrot, Chickpea, and Feta Salad",
+    "image": "images/1.webp"
+  },
+  {
+    "id": 2,
+    "title": "Cheesy Black Bean Quesadillas",
+    "image": "images/2.webp"
+  },
+  {
+    "id": 3,
+    "title": "Mexican Corn Salad",
+    "image": "images/3.jpg"
+  }
+]

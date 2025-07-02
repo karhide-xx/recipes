@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe Home</title>
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    h1 { color: #2c3e50; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 1em 0; }
+    a { text-decoration: none; color: #2980b9; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100px; vertical-align: middle; margin-right: 1em; }
+  </style>
+</head>
+<body>
+  <h1>All Recipes</h1>
+  <ul id="recipe-list"></ul>
+  <script>
+    fetch('recipes.json')
+      .then(res => res.json())
+      .then(recipes => {
+        const list = document.getElementById('recipe-list');
+        recipes.forEach(recipe => {
+          const li = document.createElement('li');
+          let img = recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : '';
+          let link = `<a href="recipe.html?id=${recipe.id}">${recipe.title}</a>`;
+          if (recipe.link) {
+            link += ` <a href="${recipe.link}" target="_blank" style="font-size:0.9em;">[external]</a>`;
+          }
+          li.innerHTML = img + link;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
