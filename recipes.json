@@ -28,5 +28,20 @@
     "id": 6,
     "title": "Roasted Carrot & Whipped Feta Tart",
     "image": "images/6.webp"
+  },       
+  {
+    "id": 7,
+    "title": "Peperonata Coddled Eggs",
+    "image": "images/7.webp"
+  },       
+  {
+    "id": 8,
+    "title": "Saag Paneer Pilau",
+    "image": "images/8.jpg"
+  },       
+  {
+    "id": 8,
+    "title": "Indian Cabbage Recipe (Oven Roasted)",
+    "image": "images/9.jpg"
   }
 ]

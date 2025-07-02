@@ -1,0 +1,42 @@
+{
+  "title": "Saag Paneer Pilau",
+  "source": "https://www.bbc.co.uk/food/recipes/saag_paneer_pilau_79132",
+  "image": "images/8.jpg",
+  "serves": 6,
+  "prep_time": "Less than 30 minutes",
+  "cook_time": "30 minutes to 1 hour",
+  "dietary": ["Nut-free", "Pregnancy-friendly", "Vegetarian"],
+  "ingredients": [
+    "6 tbsp ghee",
+    "4 tsp cumin seeds",
+    "4 garlic cloves, minced",
+    "1 brown onion, grated",
+    "225g paneer, cut into cubes",
+    "150g spinach",
+    "1 lemon, juice only",
+    "2 tsp salt",
+    "400g basmati rice",
+    "800ml hot water"
+  ],
+  "optional_ingredients": [
+    "6 large free-range eggs, at room temperature",
+    "Pickled red cabbage"
+  ],
+  "instructions": [
+    "Heat ghee in a large non-stick pan with a lid. Add cumin seeds and let them bubble for 1 minute.",
+    "Add garlic and onion; cook over medium-high heat for 5 minutes until golden.",
+    "Add paneer and cook for 2–3 minutes until golden.",
+    "Blend spinach with a splash of water to make a paste. Add to the pan with lemon juice and salt. Cook until dry.",
+    "Add rice and cook for 1–2 minutes until the grains brighten slightly.",
+    "Pour in hot water and bring to a boil. Once the water reduces and rice is visible (about 5 minutes), reduce heat to low, cover, and steam for 30 minutes.",
+    "Meanwhile, soft-boil the eggs for 6 minutes.",
+    "After 30 minutes, uncover the pilau and let it rest for 10 minutes.",
+    "Serve with halved soft-boiled eggs and pickled red cabbage, if using."
+  ],
+  "notes": [
+    "Traditionally saag paneer is a curry, but this version incorporates rice for a one-pot meal.",
+    "A blender is required to make the spinach paste."
+  ],
+  "author": "Nadiya Hussain",
+  "programme": "Nadiya's Fast Flavours"
+}
