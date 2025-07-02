@@ -29,7 +29,7 @@
   <div id="recipe-link"></div>
   <div class="source" id="recipe-source"></div>
   <h2>Ingredients</h2>
-  <ul id="ingredients"></ul>
+  <div id="ingredients"></div>
   <h2>Instructions</h2>
   <ol id="instructions"></ol>
   <div class="notes" id="recipe-notes" style="display:none;"></div>
@@ -63,8 +63,28 @@
             document.getElementById('recipe-source').innerHTML =
               `<a href="${recipe.source}" target="_blank">Source</a>`;
           }
-          document.getElementById('ingredients').innerHTML =
-            recipe.ingredients.map(i => `<li>${i}</li>`).join('');
+
+          // Handle ingredients: array or object
+          const ingredientsDiv = document.getElementById('ingredients');
+          ingredientsDiv.innerHTML = '';
+          if (Array.isArray(recipe.ingredients)) {
+            // Simple array
+            const ul = document.createElement('ul');
+            ul.innerHTML = recipe.ingredients.map(i => `<li>${i}</li>`).join('');
+            ingredientsDiv.appendChild(ul);
+          } else if (typeof recipe.ingredients === 'object' && recipe.ingredients !== null) {
+            // Object with sections
+            for (const [section, items] of Object.entries(recipe.ingredients)) {
+              const sectionTitle = section.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+              const h3 = document.createElement('h3');
+              h3.textContent = sectionTitle;
+              ingredientsDiv.appendChild(h3);
+              const ul = document.createElement('ul');
+              ul.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+              ingredientsDiv.appendChild(ul);
+            }
+          }
+
           document.getElementById('instructions').innerHTML =
             recipe.instructions.map(i => `<li>${i}</li>`).join('');
           if (recipe.notes) {

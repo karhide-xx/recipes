@@ -40,8 +40,18 @@
     "image": "images/8.jpg"
   },       
   {
-    "id": 8,
+    "id": 9,
     "title": "Indian Cabbage Recipe (Oven Roasted)",
     "image": "images/9.jpg"
+  },       
+  {
+    "id": 10,
+    "title": "Honey Roasted Chickpea and Avocado Salad",
+    "image": "images/10.jpg"
+  },       
+  {
+    "id": 11,
+    "title": "Carrot Biryani",
+    "image": "images/11.webp"
   }
 ]

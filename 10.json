@@ -1,0 +1,63 @@
+{
+  "title": "Honey Roasted Chickpea and Avocado Salad",
+  "source": "https://dishingouthealth.com/honey-roasted-chickpea-and-avocado-salad/",
+  "image": "images/10.jpg",
+  "serves": 4,
+  "prep_time": "20 minutes",
+  "cook_time": "40 minutes",
+  "total_time": "1 hour",
+  "ingredients": {
+    "honey_roasted_chickpeas": [
+      "1 (15-oz.) can chickpeas",
+      "3 tsp extra-virgin olive oil (divided)",
+      "1/2 tsp kosher salt",
+      "2 tsp honey",
+      "1/2 tsp Dijon mustard",
+      "1/4 tsp cinnamon"
+    ],
+    "salad": [
+      "4 to 5 cups chopped romaine lettuce (or lacinato kale if making ahead)",
+      "1 pint cherry tomatoes, halved",
+      "1 cup corn (fresh, canned, or thawed frozen)",
+      "1 large (or 2 small) ripe avocados, cubed",
+      "1 cup feta cheese, cubed",
+      "1/2 cup fresh torn basil leaves"
+    ],
+    "creamy_herb_dressing": [
+      "2 Tbsp tahini (or 3 Tbsp plain full-fat Greek yogurt)",
+      "1 Tbsp extra-virgin olive oil",
+      "1 Tbsp fresh lemon juice",
+      "1 Tbsp fresh chopped chives",
+      "1 clove finely grated garlic (or 1/2 tsp granulated garlic)",
+      "2 tsp honey",
+      "1/2 tsp kosher salt",
+      "1/2 tsp freshly cracked black pepper"
+    ]
+  },
+  "instructions": [
+    "Preheat oven to 375°F (190°C). Rinse and dry chickpeas thoroughly.",
+    "Toss chickpeas with 2 tsp olive oil and salt. Roast for 40 minutes, shaking pan every 15 minutes.",
+    "Mix remaining 1 tsp oil, honey, Dijon mustard, and cinnamon. Toss roasted chickpeas in glaze.",
+    "Turn oven off, return chickpeas to oven with door ajar for 20 minutes. Cool completely.",
+    "Whisk dressing ingredients together, adding warm water to reach desired consistency.",
+    "Combine lettuce, tomatoes, corn, avocado, feta, and basil in a large bowl.",
+    "Add half the chickpeas and dressing; toss to combine. Top with remaining chickpeas and drizzle with remaining dressing."
+  ],
+  "notes": [
+    "Use kale instead of romaine if making ahead to prevent sogginess.",
+    "Add chickpeas just before serving to retain crunch.",
+    "Chickpeas can be roasted a day ahead but won’t stay crispy beyond that.",
+    "For a vegan version, use maple syrup instead of honey and omit or replace feta with plant-based cheese."
+  ],
+  "nutrition": {
+    "serving_size": "1.5 cups",
+    "calories": 395,
+    "carbohydrates": "35g",
+    "protein": "13g",
+    "fat": "25g",
+    "saturated_fat": "7g",
+    "sodium": "980mg",
+    "fiber": "9g",
+    "sugar": "9g"
+  }
+}
