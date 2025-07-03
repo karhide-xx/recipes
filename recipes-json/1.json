@@ -1,0 +1,108 @@
+{
+  "title": "Carrot, Chickpea, and Feta Salad",
+  "source": "https://www.popsugar.com/food/carrot-chickpea-feta-salad-38073311",
+  "image": "images/1.webp",
+  "ingredients": [
+    {
+      "amount": "4",
+      "unit": "cups",
+      "ingredient": "carrots",
+      "note": "grated"
+    },
+    {
+      "amount": "1½",
+      "unit": "cups",
+      "ingredient": "chickpeas",
+      "note": "rinsed and drained"
+    },
+    {
+      "amount": "7",
+      "unit": "",
+      "ingredient": "medjool dates",
+      "note": "pitted and chopped"
+    },
+    {
+      "amount": "4",
+      "unit": "",
+      "ingredient": "spring onions",
+      "note": "white and green parts, chopped"
+    },
+    {
+      "amount": "½",
+      "unit": "cup",
+      "ingredient": "freesh coriander",
+      "note": "coarsely chopped"
+    },
+    {
+      "amount": "3",
+      "unit": "tbsp",
+      "ingredient": "olive oil",
+      "note": ""
+    },
+    {
+      "amount": "2",
+      "unit": "",
+      "ingredient": "limes",
+      "note": "zested and juiced"
+    },
+    {
+      "amount": "¾",
+      "unit": "tsp",
+      "ingredient": "ground cumin",
+      "note": ""
+    },
+    {
+      "amount": "¼",
+      "unit": "tsp",
+      "ingredient": "nutmeg",
+      "note": "freshly grated nutmeg"
+    },
+    {
+      "amount": "½",
+      "unit": "tsp",
+      "ingredient": "turmeric",
+      "note": ""
+    },
+    {
+      "amount": "¼",
+      "unit": "tsp",
+      "ingredient": "crushed red pepper flakes",
+      "note": ""
+    },
+    {
+      "amount": "½",
+      "unit": "tsp",
+      "ingredient": "sea salt",
+      "note": ""
+    },
+    {
+      "amount": "½",
+      "unit": "tsp",
+      "ingredient": "black pepper",
+      "note": "freshly cracked"
+    },
+    {
+      "amount": "½",
+      "unit": "cup",
+      "ingredient": "pistachios",
+      "note": "roasted shelled and coarsely chopped"
+    },
+    {
+      "amount": "½–¾",
+      "unit": "cup",
+      "ingredient": "feta cheese",
+      "note": "crumbled"
+    }
+  ],
+  "instructions": [
+    "Add the carrots, chickpeas, dates, scallions, and cilantro to a large bowl.",
+    "In a small mixing bowl, whisk together the olive oil, lime zest and juice, cumin, nutmeg, turmeric, red pepper flakes, salt, and pepper.",
+    "Pour the dressing over the carrot mixture and toss to coat.",
+    "Sprinkle in the pistachios and feta cheese and toss gently.",
+    "Serve or cover and chill in the refrigerator for up to 3 days."
+  ],
+  "notes": [
+    "1½ cups cooked chickpeas is equivalent to 1 15-ounce can.",
+    "If making the salad ahead of time, reserve the pistachios and add them before serving to preserve their crunch."
+  ]
+}

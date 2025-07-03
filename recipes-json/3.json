@@ -1,0 +1,81 @@
+{
+  "title": "Mexican Corn Salad",
+  "source": "https://www.theglutenfreeblogger.com/mexican-corn-salad/",
+  "image": "images/3.jpg",
+  "serves": "4",
+  "prep_time": "10 minutes",
+  "total_time": "10 minutes",
+  "ingredients": [
+    {
+      "amount": "300",
+      "unit": "g",
+      "ingredient": "Sweetcorn",
+      "note": "tin"
+    },
+    {
+      "amount": "250",
+      "unit": "g",
+      "ingredient": "cherry tomatoes",
+      "note": "quartered"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "red onion",
+      "note": "finely chopped"
+    },
+    {
+      "amount": "75",
+      "unit": "g",
+      "ingredient": "jalapeños",
+      "note": "sliced and chopped"
+    },
+    {
+      "amount": "100",
+      "unit": "g",
+      "ingredient": "feta cheese",
+      "note": "crumbled"
+    },
+    {
+      "amount": "Handful",
+      "unit": "",
+      "ingredient": "fresh coriander",
+      "note": "chopped"
+    },
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "mayonnaise",
+      "note": ""
+    },
+    {
+      "amount": "20",
+      "unit": "g",
+      "ingredient": "butter",
+      "note": "melted"
+    },
+    {
+      "amount": "2",
+      "unit": "tsp",
+      "ingredient": "paprika",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "lemon",
+      "note": "juiced "
+    }
+  ],
+  "instructions": [
+    "Add the sweetcorn, tomatoes, red onion, jalapeños, feta, and coriander to a large bowl and mix well.",
+    "In a separate bowl, melt the butter and stir in the mayonnaise, paprika, and lemon juice.",
+    "Pour the dressing over the salad and stir to combine.",
+    "Serve immediately or refrigerate for later."
+  ],
+  "notes": [
+    "Can be made up to 24 hours in advance.",
+    "Store leftovers in the fridge for 3–5 days.",
+    "Use vegan feta and dairy-free margarine for a vegan version."
+  ]
+}

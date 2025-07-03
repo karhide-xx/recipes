@@ -1,0 +1,118 @@
+{
+  "title": "Red Lentil Dahl",
+  "source": "https://veggiedesserts.com/red-lentil-dahl/",
+  "image": "images/12.jpg",
+  "link": "https://veggiedesserts.com/red-lentil-dahl/",
+  "ingredients": [
+    {
+      "amount": "1",
+      "unit": "tbsp",
+      "ingredient": "oil",
+      "note": "olive or coconut"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "onion",
+      "note": "finely chopped"
+    },
+    {
+      "amount": "2",
+      "unit": "cloves",
+      "ingredient": "garlic",
+      "note": "crushed"
+    },
+    {
+      "amount": "1",
+      "unit": "inch",
+      "ingredient": "ginger",
+      "note": "grated"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "green chili",
+      "note": "finely chopped (optional)"
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "ground cumin",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "ground coriander",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "turmeric",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "gram masala",
+      "note": ""
+    },
+    {
+      "amount": "1/2",
+      "unit": "tsp",
+      "ingredient": "chili powder",
+      "note": "optional"
+    },
+    {
+      "amount": "200",
+      "unit": "g",
+      "ingredient": "red lentils",
+      "note": "rinsed"
+    },
+    {
+      "amount": "600",
+      "unit": "ml",
+      "ingredient": "vegetable stock",
+      "note": ""
+    },
+    {
+      "amount": "400",
+      "unit": "ml",
+      "ingredient": "coconut milk",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "can",
+      "ingredient": "chopped tomatoes",
+      "note": "can (400g)"
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "salt and pepper",
+      "note": "to taste"
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "fresh coriander",
+      "note": "to serve"
+    }
+  ],
+  "instructions": [
+    "Heat the oil in a large pan over medium heat. Add the onion and cook for 5 minutes until soft.",
+    "Add the garlic, ginger, and green chili and cook for 1 minute.",
+    "Stir in the cumin, coriander, turmeric, garam masala, and chili powder and cook for 1 minute.",
+    "Add the lentils, vegetable stock, coconut milk, and chopped tomatoes. Stir well.",
+    "Bring to the boil, then reduce the heat and simmer for 25 minutes, stirring occasionally, until the lentils are soft and the dahl is thick.",
+    "Season with salt and pepper to taste.",
+    "Serve hot, garnished with fresh cilantro."
+  ],
+  "notes": [
+    "You can add spinach or kale at the end for extra greens.",
+    "Adjust the chili to your preferred spice level.",
+    "Leftovers keep well in the fridge for up to 3 days or can be frozen."
+  ]
+}

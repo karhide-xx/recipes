@@ -8,7 +8,7 @@
     body { font-family: sans-serif; margin: 2em; }
     h1 { color: #2c3e50; }
     ul { margin-bottom: 2em; }
-    .ingredient-amount { font-weight: bold; margin-right: 0.5em; }
+    .ingredient-amount { font-weight: bold; margin-right: 0.2em; }
     .ingredient-item { margin-bottom: 0.3em; }
     @media (max-width: 600px) {
       body { margin: 1em; }
@@ -22,24 +22,15 @@
   <div id="ingredients-list"></div>
   <a href="index.html">&larr; Back to recipes</a>
   <script>
-    function splitIngredient(str) {
-      const match = str.match(/^([\d\/.,\s\-–]+[a-zA-Z%]*)\s+(.+)$/);
-      if (match) {
-        return { amount: match[1].trim(), ingredient: match[2].trim() };
-      } else {
-        return { amount: '', ingredient: str.trim() };
-      }
-    }
-
     // Get selected IDs from query string
     const params = new URLSearchParams(window.location.search);
     const ids = params.get('ids') ? params.get('ids').split(',') : [];
     if (ids.length === 0) {
       document.getElementById('ingredients-list').innerHTML = '<p>No recipes selected.</p>';
     } else {
-      Promise.all(ids.map(id => fetch(id + '.json').then(r => r.json())))
+      Promise.all(ids.map(id => fetch('recipes-json/' + id + '.json').then(r => r.json())))
         .then(recipes => {
-          // Gather and combine all ingredients
+          // Gather and group all ingredients
           const ingredientMap = {};
           recipes.forEach(recipe => {
             let items = [];
@@ -49,21 +40,29 @@
               Object.values(recipe.ingredients).forEach(arr => items = items.concat(arr));
             }
             items.forEach(i => {
-              const { amount, ingredient } = splitIngredient(i);
-              const key = ingredient.toLowerCase();
+              const key = i.ingredient.trim().toLowerCase();
               if (!ingredientMap[key]) {
-                ingredientMap[key] = { ingredient, amounts: [] };
+                ingredientMap[key] = { ingredient: i.ingredient, entries: [] };
               }
-              if (amount) ingredientMap[key].amounts.push(amount);
+              ingredientMap[key].entries.push(i);
             });
           });
 
-          // Render combined list
+          // Render grouped list (amounts in brackets)
           const container = document.getElementById('ingredients-list');
           const ul = document.createElement('ul');
           ul.innerHTML = Object.values(ingredientMap).map(obj => {
-            const amounts = obj.amounts.length ? `<span class="ingredient-amount">${obj.amounts.join(' + ')}</span>` : '';
-            return `<li class="ingredient-item">${amounts}${obj.ingredient}</li>`;
+            const details = obj.entries.map(e => {
+              let str = '';
+              if (e.amount || e.unit) {
+                str += '(';
+                if (e.amount) str += `<span class="ingredient-amount">${e.amount}</span>`;
+                if (e.unit) str += ` <span class="ingredient-unit">${e.unit}</span>`;
+                str = str.trim() + ')';
+              }
+              return str;
+            }).join(' + ');
+            return `<li class="ingredient-item">${obj.ingredient} ${details}</li>`;
           }).join('');
           container.appendChild(ul);
         });

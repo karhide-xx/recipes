@@ -1,0 +1,104 @@
+{
+  "title": "Sausage & Baked Bean Casserole",
+  "source": "https://hintofhelen.com/sausage-baked-bean-casserole-recipe/",
+  "image": "images/4.jpg",
+  "serves": 4,
+  "prep_time": "3 minutes",
+  "cook_time": "25 minutes",
+  "total_time": "28 minutes",
+  "ingredients": [
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "onion",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "pepper",
+      "note": ""
+    },
+    {
+      "amount": "8",
+      "unit": "",
+      "ingredient": "sausages",
+      "note": "pack of your favourite  (6, 8, or 12)"
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "garlic",
+      "note": "puree (or 1 fresh, crushed clove)"
+    },
+    {
+      "amount": "1",
+      "unit": "tbsp",
+      "ingredient": "t",
+      "ingredient": "t",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "paprika",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "thyme",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tbsp",
+      "ingredient": "Worcestershire sauce",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "sugar",
+      "note": ""
+    },
+    {
+      "amount": "400",
+      "unit": "g",
+      "ingredient": "baked beans",
+      "note": "Tin"
+    },
+    {
+      "amount": "400",
+      "unit": "g",
+      "ingredient": "Chopped tomatoes",
+      "note": "tin "
+    }
+  ],
+  "instructions": [
+    "Cut the pepper and onion into bite-sized pieces.",
+    "Heat oil in a large frying pan over medium heat.",
+    "Add sausages and cook until one side is browned.",
+    "Add onions, stir, and turn sausages to brown the other sides.",
+    "Cook until sausages are browned and onions are translucent.",
+    "Add chopped pepper, garlic, tomato puree, paprika, thyme, and sugar. Stir and cook for 1 minute.",
+    "Add Worcestershire sauce, baked beans, and chopped tomatoes.",
+    "Cover with a lid and simmer on low heat for 5–10 minutes until thickened and hot throughout.",
+    "Serve with mashed potatoes and buttered bread."
+  ],
+  "notes": [
+    "Use any sausages you like—6 or 8 work well.",
+    "Peppers are optional if your family doesn’t like them."
+  ],
+  "nutrition": {
+    "calories": 527,
+    "fat": "39g",
+    "saturated_fat": "13g",
+    "cholesterol": "83mg",
+    "sodium": "1541mg",
+    "carbohydrates": "32g",
+    "fiber": "6g",
+    "sugar": "15g",
+    "protein": "23g"
+  }
+}

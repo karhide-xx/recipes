@@ -39,7 +39,7 @@
     if (!id) {
       document.body.innerHTML = '<p>No recipe specified. <a href="index.html">Back to home</a></p>';
     } else {
-      fetch(id + '.json')
+      fetch('recipes-json/' + id + '.json')
         .then(res => {
           if (!res.ok) throw new Error('Not found');
           return res.json();
@@ -64,13 +64,21 @@
               `<a href="${recipe.source}" target="_blank">Source</a>`;
           }
 
-          // Handle ingredients: array or object
+          // Handle ingredients: array or object (new format)
           const ingredientsDiv = document.getElementById('ingredients');
           ingredientsDiv.innerHTML = '';
+          function renderIngredient(i) {
+            let str = '';
+            if (i.amount) str += `<span class="ingredient-amount">${i.amount}</span> `;
+            if (i.unit) str += `<span class="ingredient-unit">${i.unit}</span> `;
+            str += i.ingredient;
+            // Optionally add note: if (i.note) str += ` <span class="ingredient-note">(${i.note})</span>`;
+            return `<li>${str.trim()}</li>`;
+          }
           if (Array.isArray(recipe.ingredients)) {
-            // Simple array
+            // Flat array of ingredient objects
             const ul = document.createElement('ul');
-            ul.innerHTML = recipe.ingredients.map(i => `<li>${i}</li>`).join('');
+            ul.innerHTML = recipe.ingredients.map(renderIngredient).join('');
             ingredientsDiv.appendChild(ul);
           } else if (typeof recipe.ingredients === 'object' && recipe.ingredients !== null) {
             // Object with sections
@@ -80,7 +88,7 @@
               h3.textContent = sectionTitle;
               ingredientsDiv.appendChild(h3);
               const ul = document.createElement('ul');
-              ul.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+              ul.innerHTML = items.map(renderIngredient).join('');
               ingredientsDiv.appendChild(ul);
             }
           }

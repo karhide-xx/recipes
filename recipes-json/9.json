@@ -1,0 +1,134 @@
+{
+  "title": "Indian Cabbage Recipe (Oven Roasted)",
+  "source": "https://www.thedeliciouscrescent.com/indian-cabbage-recipe/",
+  "image": "images/9.jpg",
+  "serves": 6,
+  "prep_time": "10 minutes",
+  "cook_time": "20–25 minutes",
+  "total_time": "30–35 minutes",
+  "ingredients": [
+    {
+      "amount": "3",
+      "unit": "tbsp",
+      "ingredient": "peanut oil ",
+      "note": "or sesame oil"
+    },
+    {
+      "amount": "2",
+      "unit": "tsp",
+      "ingredient": "ginger",
+      "note": "grated"
+    },
+    {
+      "amount": "1",
+      "unit": "tbsp",
+      "ingredient": "green chilies",
+      "note": "chopped (remove seeds to lower heat)"
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "cumin seeds",
+      "note": ""
+    },
+    {
+      "amount": "½",
+      "unit": "tsp",
+      "ingredient": "turmeric",
+      "note": ""
+    },
+    {
+      "amount": "½",
+      "unit": "tsp",
+      "ingredient": "red pepper flakes",
+      "note": "or ¼ teaspoon cayenne pepper"
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "salt",
+      "note": "to taste"
+    },
+    {
+      "amount": "4",
+      "unit": "cups",
+      "ingredient": "cabbage",
+      "note": "shredded "
+    },
+    {
+      "amount": "1",
+      "unit": "cup",
+      "ingredient": "carrots",
+      "note": "shredded"
+    },
+    {
+      "amount": "8–10",
+      "unit": "",
+      "ingredient": "curry leaves",
+      "note": ""
+    },
+    {
+      "amount": "¼",
+      "unit": "cup",
+      "ingredient": "fresh coconut",
+      "note": "grated"
+    },
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "coriander",
+      "note": "chopped (cilantro)"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "lemon",
+      "note": "juice to taste"
+    },
+    {
+      "amount": "½",
+      "unit": "tsp",
+      "ingredient": "mustard seeds",
+      "note": "Optional, for extra flavor"
+    },
+    {
+      "amount": "¼",
+      "unit": "cup",
+      "ingredient": "shallots",
+      "note": "Optional, for extra flavor"
+    },
+    {
+      "amount": "4",
+      "unit": "tbsp",
+      "ingredient": "peanuts",
+      "note": "Optional, for extra flavor crushed"
+    }
+  ],
+  "instructions": [
+    "Preheat oven to 400°F (200°C).",
+    "In a large bowl, mix oil, ginger, green chilies, cumin seeds, turmeric, red pepper flakes, and salt.",
+    "Add shredded cabbage, carrots, and curry leaves. Toss to coat evenly.",
+    "Spread mixture on a parchment-lined baking sheet and roast for 20–25 minutes, stirring halfway through, until tender and slightly caramelized.",
+    "Remove from oven and sprinkle with grated coconut, chopped cilantro, and lemon juice. Toss gently.",
+    "Garnish with crushed peanuts or sesame seeds if desired. Serve hot with rice."
+  ],
+  "notes": [
+    "Use fresh grated coconut for best flavor. If using dried, add it before roasting.",
+    "You can prep the mixture ahead and refrigerate it up to a day in advance.",
+    "Stovetop variation: stir-fry the mixture in a skillet until tender and golden.",
+    "This dish is vegan, gluten-free, low-carb, and suitable for many dietary needs."
+  ],
+  "nutrition": {
+    "calories": 146,
+    "carbohydrates": "9g",
+    "protein": "3g",
+    "fat": "12g",
+    "saturated_fat": "3g",
+    "fiber": "3g",
+    "sugar": "4g",
+    "vitamin_a": "3723 IU",
+    "vitamin_c": "46mg",
+    "calcium": "44mg",
+    "iron": "1mg"
+  }
+}

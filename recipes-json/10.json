@@ -1,0 +1,163 @@
+{
+  "title": "Honey Roasted Chickpea and Avocado Salad",
+  "source": "https://dishingouthealth.com/honey-roasted-chickpea-and-avocado-salad/",
+  "image": "images/10.jpg",
+  "serves": 4,
+  "prep_time": "20 minutes",
+  "cook_time": "40 minutes",
+  "total_time": "1 hour",
+  "ingredients": {
+    "honey_roasted_chickpeas": [
+      {
+        "amount": "1",
+        "unit": "can",
+        "ingredient": "Chickpeas",
+        "note": "15-oz."
+      },
+      {
+        "amount": "3",
+        "unit": "tsp",
+        "ingredient": "extra-virgin olive oickpeas",
+        "note": "divided"
+      },
+      {
+        "amount": "1/2",
+        "unit": "tsp",
+        "ingredient": "salt",
+        "note": ""
+      },
+      {
+        "amount": "2",
+        "unit": "tsp",
+        "ingredient": "honey",
+        "note": ""
+      },
+      {
+        "amount": "1/2",
+        "unit": "tsp",
+        "ingredient": "Dijon mustard",
+        "note": ""
+      },
+      {
+        "amount": "1/4",
+        "unit": "tsp",
+        "ingredient": "cinnamon",
+        "note": ""
+      }
+    ],
+    "salad": [
+      {
+        "amount": "4",
+        "unit": "cups",
+        "ingredient": "romaine lettuce",
+        "note": "chopped (or lacinato kale if making ahead)"
+      },
+      {
+        "amount": "1",
+        "unit": "pint",
+        "ingredient": "cherry tomatoes",
+        "note": "halved"
+      },
+      {
+        "amount": "1",
+        "unit": "cup",
+        "ingredient": "sweet corn",
+        "note": "fresh, canned, or thawed frozen"
+      },
+      {
+        "amount": "1",
+        "unit": "tsp",
+        "ingredient": "avacado",
+        "note": "large cubed"
+      },
+      {
+        "amount": "1",
+        "unit": "cup",
+        "ingredient": "feta cheese",
+        "note": "cubed"
+      },
+      {
+        "amount": "1/2",
+        "unit": "cup",
+        "ingredient": "basil leaves",
+        "note": "torn"
+      }
+    ],
+    "creamy_herb_dressing": [
+      {
+        "amount": "3",
+        "unit": "tbsp",
+        "ingredient": "greek yogurt",
+        "note": "or 2 tbsp tahini"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "extra-virgin olive oil",
+        "note": ""
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "lemon juice",
+        "note": "fresh"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "chives",
+        "note": "chopped"
+      },
+      {
+        "amount": "1",
+        "unit": "clove",
+        "ingredient": "garlic",
+        "note": "grated (or 1/2 tsp granulated garlic)"
+      },
+      {
+        "amount": "2",
+        "unit": "tsp",
+        "ingredient": "honey",
+        "note": ""
+      },
+      {
+        "amount": "1/2",
+        "unit": "tsp",
+        "ingredient": "salt",
+        "note": ""
+      },
+      {
+        "amount": "1/2",
+        "unit": "tsp",
+        "ingredient": "black pepper",
+        "note": ""
+      }
+    ]
+  },
+  "instructions": [
+    "Preheat oven to 375°F (190°C). Rinse and dry chickpeas thoroughly.",
+    "Toss chickpeas with 2 tsp olive oil and salt. Roast for 40 minutes, shaking pan every 15 minutes.",
+    "Mix remaining 1 tsp oil, honey, Dijon mustard, and cinnamon. Toss roasted chickpeas in glaze.",
+    "Turn oven off, return chickpeas to oven with door ajar for 20 minutes. Cool completely.",
+    "Whisk dressing ingredients together, adding warm water to reach desired consistency.",
+    "Combine lettuce, tomatoes, corn, avocado, feta, and basil in a large bowl.",
+    "Add half the chickpeas and dressing; toss to combine. Top with remaining chickpeas and drizzle with remaining dressing."
+  ],
+  "notes": [
+    "Use kale instead of romaine if making ahead to prevent sogginess.",
+    "Add chickpeas just before serving to retain crunch.",
+    "Chickpeas can be roasted a day ahead but won’t stay crispy beyond that.",
+    "For a vegan version, use maple syrup instead of honey and omit or replace feta with plant-based cheese."
+  ],
+  "nutrition": {
+    "serving_size": "1.5 cups",
+    "calories": 395,
+    "carbohydrates": "35g",
+    "protein": "13g",
+    "fat": "25g",
+    "saturated_fat": "7g",
+    "sodium": "980mg",
+    "fiber": "9g",
+    "sugar": "9g"
+  }
+}

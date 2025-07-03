@@ -1,0 +1,81 @@
+{
+  "title": "Elote (Grilled Mexican Corn Salad)",
+  "source": "https://ohsweetbasil.com/elote-grilled-mexican-corn-salad-recipe/",
+  "image": "images/14.webp",
+  "link": "https://ohsweetbasil.com/elote-grilled-mexican-corn-salad-recipe/",
+  "ingredients": [
+    {
+      "amount": "4",
+      "unit": "ears",
+      "ingredient": "sweet corn",
+      "note": "husked"
+    },
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "mayonnaise",
+      "note": ""
+    },
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "sour cream",
+      "note": ""
+    },
+    {
+      "amount": "1/2",
+      "unit": "cup",
+      "ingredient": "cotija cheese",
+      "note": "or feta crumbled"
+    },
+    {
+      "amount": "1/2",
+      "unit": "tsp",
+      "ingredient": "chili powder",
+      "note": ""
+    },
+    {
+      "amount": "1/4",
+      "unit": "tsp",
+      "ingredient": "smoked paprika",
+      "note": ""
+    },
+    {
+      "amount": "1/4",
+      "unit": "tsp",
+      "ingredient": "garlic powder",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "lime",
+      "note": "juice"
+    },
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "fresh coriander",
+      "note": "chopped"
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "salt and pepper",
+      "note": "to taste"
+    }
+  ],
+  "instructions": [
+    "Preheat grill to medium-high heat.",
+    "Grill the corn, turning occasionally, until charred and cooked through, about 8-10 minutes.",
+    "Remove corn from grill and let cool slightly, then cut kernels off the cob.",
+    "In a large bowl, mix together mayonnaise, sour cream, cotija cheese, chili powder, smoked paprika, garlic powder, and lime juice.",
+    "Add the grilled corn kernels and cilantro to the bowl and toss to combine.",
+    "Season with salt and pepper to taste.",
+    "Serve warm or at room temperature, garnished with extra cheese and cilantro if desired."
+  ],
+  "notes": [
+    "You can substitute feta cheese for cotija if needed.",
+    "For extra heat, add a pinch of cayenne or diced jalapeño."
+  ]
+}

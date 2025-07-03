@@ -1,0 +1,92 @@
+{
+  "title": "Carrot Biryani",
+  "source": "https://www.bbcgoodfood.com/recipes/carrot-biriyani",
+  "image": "images/11.webp",
+  "serves": 4,
+  "prep_time": "10 minutes",
+  "cook_time": "15 minutes",
+  "total_time": "25 minutes",
+  "difficulty": "Easy",
+  "rating": 4.5,
+  "ingredients": [
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "o",
+      "note": "live oil"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "o",
+      "note": "nion, sliced"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "green chill",
+      "note": "chopped (deseeded if you don’t like it very hot)"
+    },
+    {
+      "amount": "1",
+      "unit": "clove",
+      "ingredient": "garlic",
+      "note": "peeled"
+    },
+    {
+      "amount": "1",
+      "unit": "tbsp",
+      "ingredient": "garam masala",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "tsp",
+      "ingredient": "turmeric",
+      "note": ""
+    },
+    {
+      "amount": "3",
+      "unit": "",
+      "ingredient": "carrots",
+      "note": "grated"
+    },
+    {
+      "amount": "2",
+      "unit": "pouches",
+      "ingredient": "brown basmati rice",
+      "note": "200g pouches"
+    },
+    {
+      "amount": "150",
+      "unit": "g",
+      "ingredient": "frozen peas",
+      "note": ""
+    },
+    {
+      "amount": "50",
+      "unit": "g",
+      "ingredient": "roasted cashews",
+      "note": ""
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "Fresh coriander and yogurt",
+      "note": "to serve"
+    }
+  ],
+  "instructions": [
+    "Heat the oil in a large frying pan. Add the onion with a big pinch of salt and fry until softened, around 5 minutes.",
+    "Add the chilli and crush in the garlic. Cook for 1 minute more.",
+    "Stir in the garam masala and turmeric with a splash of water. Cook for a couple of minutes.",
+    "Add the grated carrots and stir well to coat in the spices.",
+    "Tip in the rice, peas, and cashews. Break up any clumps of rice and mix everything together.",
+    "Cover and cook over high heat for 5 minutes. Let some rice catch on the base for texture.",
+    "Scatter over coriander and spoon over yogurt to serve."
+  ],
+  "notes": [
+    "You can add a splash of water or a vegetable stock cube for extra moisture and flavor.",
+    "Great as a quick vegetarian main or a side dish."
+  ]
+}

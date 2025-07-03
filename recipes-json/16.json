@@ -1,0 +1,69 @@
+{
+  "title": "Spiced Carrot & Lentil Soup",
+  "source": "https://www.bbcgoodfood.com/recipes/spiced-carrot-lentil-soup",
+  "image": "images/16.jpg",
+  "link": "https://www.bbcgoodfood.com/recipes/spiced-carrot-lentil-soup",
+  "ingredients": [
+    {
+      "amount": "2",
+      "unit": "tsp",
+      "ingredient": "cumin seeds",
+      "note": ""
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "chilli flakes",
+      "note": "pinch"
+    },
+    {
+      "amount": "2",
+      "unit": "tbsp",
+      "ingredient": "olive oil",
+      "note": ""
+    },
+    {
+      "amount": "600",
+      "unit": "g",
+      "ingredient": "carrots",
+      "note": "washed and coarsely grated (no need to peel)"
+    },
+    {
+      "amount": "140",
+      "unit": "g",
+      "ingredient": "split red lentils",
+      "note": ""
+    },
+    {
+      "amount": "1",
+      "unit": "litre",
+      "ingredient": "vegetable stock",
+      "note": "hot  (from a cube is fine)"
+    },
+    {
+      "amount": "125",
+      "unit": "ml",
+      "ingredient": "milk",
+      "note": "or dairy-free alternative"
+    },
+    {
+      "amount": "",
+      "unit": "",
+      "ingredient": "plain yogurt",
+      "note": "yogurt and naan bread, to serve"
+    }
+  ],
+  "instructions": [
+    "Heat a large saucepan and dry-fry the cumin seeds and a pinch of chilli flakes for 1 min, or until they start to jump around the pan and release their aromas.",
+    "Scoop out about half with a spoon and set aside.",
+    "Add 2 tbsp olive oil, 600g coarsely grated carrots, 140g split red lentils, 1 litre hot vegetable stock and 125ml milk to the pan and bring to the boil.",
+    "Simmer for 15 mins until the lentils have swollen and softened.",
+    "Whizz the soup with a stick blender or in a food processor until smooth (or leave it chunky if you prefer).",
+    "Season to taste and finish with a dollop of plain yogurt and a sprinkling of the reserved toasted spices.",
+    "Serve with naan bread."
+  ],
+  "notes": [
+    "For a vegan version, use dairy-free milk and yogurt.",
+    "You can freeze this soup for up to 1 month."
+  ]
+}
