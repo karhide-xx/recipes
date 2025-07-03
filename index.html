@@ -94,6 +94,22 @@
     .show.top:hover {
       background: #145a8a;
     }
+    #clear-selected {
+      display: none;
+      margin: 1em auto 1em auto;
+      padding: 0.7em 2em;
+      font-size: 1em;
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: background 0.2s;
+    }
+    #clear-selected:hover {
+      background: #c0392b;
+    }
     @media (max-width: 600px) {
       body { margin: 1em; }
       .grid { gap: 1em; }
@@ -102,18 +118,31 @@
       .select-recipe { top: 4px; left: 4px; }
       .show { font-size: 1.1em; padding: 0.7em 1.2em; }
       .show.top { font-size: 0.9em; padding: 0.5em 1em; }
+      #clear-selected { font-size: 0.95em; padding: 0.5em 1em; }
     }
   </style>
 </head>
 <body>
   <h1>Recipes</h1>
   <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title...">
-  <button id="show-ingredients-top" class="show top">List Selected Ingredients</button>
+  <div style="display: flex; gap: 1em; align-items: center; justify-content: center; margin-bottom: 2em;">
+    <button id="show-ingredients-top" class="show top">List Selected Ingredients</button>
+    <button id="clear-selected">Clear Selected</button>
+  </div>
   <ul id="recipe-list" class="grid"></ul>
   <button id="show-ingredients" class="show">List Selected Ingredients</button>
   <script>
     let allRecipes = [];
     let selectedIds = new Set();
+
+    function updateClearButton() {
+      const btn = document.getElementById('clear-selected');
+      if (selectedIds.size > 0) {
+        btn.style.display = 'block';
+      } else {
+        btn.style.display = 'none';
+      }
+    }
 
     function handleCheckboxChange(e) {
       const id = e.target.getAttribute('data-id');
@@ -122,6 +151,7 @@
       } else {
         selectedIds.delete(id);
       }
+      updateClearButton();
     }
 
     function renderRecipes(recipes) {
@@ -143,6 +173,8 @@
       document.querySelectorAll('.select-recipe').forEach(cb => {
         cb.addEventListener('change', handleCheckboxChange);
       });
+
+      updateClearButton();
     }
 
     fetch('recipes.json')
@@ -172,6 +204,11 @@
 
     document.getElementById('show-ingredients').addEventListener('click', handleShowIngredients);
     document.getElementById('show-ingredients-top').addEventListener('click', handleShowIngredients);
+
+    document.getElementById('clear-selected').addEventListener('click', function() {
+      selectedIds.clear();
+      renderRecipes(allRecipes);
+    });
   </script>
 </body>
 </html>
