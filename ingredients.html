@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combined Ingredients</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    h1 { color: #2c3e50; }
+    ul { margin-bottom: 2em; }
+    .ingredient-amount { font-weight: bold; margin-right: 0.5em; }
+    .ingredient-item { margin-bottom: 0.3em; }
+    @media (max-width: 600px) {
+      body { margin: 1em; }
+      h1 { font-size: 1.3em; }
+      ul { font-size: 0.98em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Combined Ingredients</h1>
+  <div id="ingredients-list"></div>
+  <a href="index.html">&larr; Back to recipes</a>
+  <script>
+    function splitIngredient(str) {
+      const match = str.match(/^([\d\/.,\s\-–]+[a-zA-Z%]*)\s+(.+)$/);
+      if (match) {
+        return { amount: match[1].trim(), ingredient: match[2].trim() };
+      } else {
+        return { amount: '', ingredient: str.trim() };
+      }
+    }
+
+    // Get selected IDs from query string
+    const params = new URLSearchParams(window.location.search);
+    const ids = params.get('ids') ? params.get('ids').split(',') : [];
+    if (ids.length === 0) {
+      document.getElementById('ingredients-list').innerHTML = '<p>No recipes selected.</p>';
+    } else {
+      Promise.all(ids.map(id => fetch(id + '.json').then(r => r.json())))
+        .then(recipes => {
+          // Gather and combine all ingredients
+          const ingredientMap = {};
+          recipes.forEach(recipe => {
+            let items = [];
+            if (Array.isArray(recipe.ingredients)) {
+              items = recipe.ingredients;
+            } else if (typeof recipe.ingredients === 'object' && recipe.ingredients !== null) {
+              Object.values(recipe.ingredients).forEach(arr => items = items.concat(arr));
+            }
+            items.forEach(i => {
+              const { amount, ingredient } = splitIngredient(i);
+              const key = ingredient.toLowerCase();
+              if (!ingredientMap[key]) {
+                ingredientMap[key] = { ingredient, amounts: [] };
+              }
+              if (amount) ingredientMap[key].amounts.push(amount);
+            });
+          });
+
+          // Render combined list
+          const container = document.getElementById('ingredients-list');
+          const ul = document.createElement('ul');
+          ul.innerHTML = Object.values(ingredientMap).map(obj => {
+            const amounts = obj.amounts.length ? `<span class="ingredient-amount">${obj.amounts.join(' + ')}</span>` : '';
+            return `<li class="ingredient-item">${amounts}${obj.ingredient}</li>`;
+          }).join('');
+          container.appendChild(ul);
+        });
+    }
+  </script>
+</body>
+</html>

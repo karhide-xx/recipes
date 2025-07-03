@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Recipe Home</title>
+  <title>Recipes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: sans-serif; margin: 2em; }
@@ -35,6 +35,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
     .card:hover {
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -61,11 +62,19 @@
       margin-left: 0.5em;
       word-break: break-word;
     }
+    .select-recipe {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      transform: scale(1.3);
+      z-index: 2;
+    }
     @media (max-width: 600px) {
       body { margin: 1em; }
       .grid { gap: 1em; }
       .card { padding: 0.5em; }
       .card img { max-height: 80px; }
+      .select-recipe { top: 4px; left: 4px; }
     }
   </style>
 </head>
@@ -73,6 +82,7 @@
   <h1>Recipes</h1>
   <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title...">
   <ul id="recipe-list" class="grid"></ul>
+  <button id="show-ingredients" style="margin-top:2em;font-size:1em;">Show Ingredients</button>
   <script>
     let allRecipes = [];
 
@@ -85,7 +95,8 @@
         let img = recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : '';
         let link = `<a class="card-title" href="recipe.html?id=${recipe.id}">${recipe.title}</a>`;
         let external = recipe.link ? `<a class="external-link" href="${recipe.link}" target="_blank" title="External link">[source]</a>` : '';
-        li.innerHTML = img + link + external;
+        let checkbox = `<input type="checkbox" class="select-recipe" data-id="${recipe.id}">`;
+        li.innerHTML = checkbox + img + link + external;
         list.appendChild(li);
       });
     }
@@ -104,6 +115,18 @@
           recipe.title.toLowerCase().includes(value)
         )
       );
+    });
+
+    document.getElementById('show-ingredients').addEventListener('click', function() {
+      // Get all checked recipes
+      const checked = Array.from(document.querySelectorAll('.select-recipe:checked'))
+        .map(cb => cb.getAttribute('data-id'));
+      if (checked.length === 0) {
+        alert('Please select at least one recipe.');
+        return;
+      }
+      // Pass selected IDs to ingredients.html via query string
+      window.location.href = 'ingredients.html?ids=' + checked.join(',');
     });
   </script>
 </body>
