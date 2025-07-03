@@ -81,12 +81,9 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       transition: background 0.2s;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
     .show.top {
-      margin-top: 0;
-      margin-bottom: 2em;
+      margin: 0;
       font-size: 1em;
       padding: 0.7em 1.5em;
     }
@@ -96,9 +93,9 @@
     }
     #clear-selected {
       display: none;
-      margin: 1em auto 1em auto;
-      padding: 0.7em 2em;
+      height: 2.5em;
       font-size: 1em;
+      padding: 0 1.2em;
       background: #e74c3c;
       color: #fff;
       border: none;
@@ -106,6 +103,7 @@
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       transition: background 0.2s;
+      margin: 0;
     }
     #clear-selected:hover {
       background: #c0392b;
@@ -124,13 +122,16 @@
 </head>
 <body>
   <h1>Recipes</h1>
-  <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title...">
   <div style="display: flex; gap: 1em; align-items: center; justify-content: center; margin-bottom: 2em;">
+    <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title..." style="margin-bottom:0;">
+    <button id="clear-search" style="height:2.5em; font-size:1em; padding:0 1.2em; background:#e67e22; color:#fff; border:none; border-radius:6px; cursor:pointer;">Clear Search</button>
+  </div>
+  <div id="top-actions" style="display: flex; gap: 1em; align-items: center; justify-content: center; margin-bottom: 2em;">
     <button id="show-ingredients-top" class="show top">List Selected Ingredients</button>
     <button id="clear-selected">Clear Selected</button>
   </div>
   <ul id="recipe-list" class="grid"></ul>
-  <button id="show-ingredients" class="show">List Selected Ingredients</button>
+  <button id="show-ingredients" class="show" style="display:block; margin-left:auto; margin-right:auto;">List Selected Ingredients</button>
   <script>
     let allRecipes = [];
     let selectedIds = new Set();
@@ -191,6 +192,11 @@
           recipe.title.toLowerCase().includes(value)
         )
       );
+    });
+
+    document.getElementById('clear-search').addEventListener('click', function() {
+      document.getElementById('filter').value = '';
+      renderRecipes(allRecipes);
     });
 
     function handleShowIngredients() {
