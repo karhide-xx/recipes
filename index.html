@@ -69,20 +69,41 @@
       transform: scale(1.3);
       z-index: 2;
     }
+    .show {
+      margin-top: .5em;
+      font-size: 1.1em;
+      padding: 1em 2.5em;
+      background: #2980b9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: background 0.2s;
+      display: block;
+      /* margin-left: auto;
+      margin-right: auto; */
+    }
+
+    .show:hover  {
+      background: #145a8a;
+    }
     @media (max-width: 600px) {
       body { margin: 1em; }
       .grid { gap: 1em; }
       .card { padding: 0.5em; }
       .card img { max-height: 80px; }
       .select-recipe { top: 4px; left: 4px; }
+      .show { font-size: 1.1em; padding: 0.7em 1.2em; }
     }
   </style>
 </head>
 <body>
   <h1>Recipes</h1>
   <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title...">
+  <button id="show-ingredients-top" class="show top">List Selected Ingredients</button>
   <ul id="recipe-list" class="grid"></ul>
-  <button id="show-ingredients" style="margin-top:2em;font-size:1em;">Show Ingredients</button>
+  <button id="show-ingredients" class="show">List Selected Ingredients</button>
   <script>
     let allRecipes = [];
 
@@ -117,17 +138,18 @@
       );
     });
 
-    document.getElementById('show-ingredients').addEventListener('click', function() {
-      // Get all checked recipes
+    function handleShowIngredients() {
       const checked = Array.from(document.querySelectorAll('.select-recipe:checked'))
         .map(cb => cb.getAttribute('data-id'));
       if (checked.length === 0) {
         alert('Please select at least one recipe.');
         return;
       }
-      // Pass selected IDs to ingredients.html via query string
       window.location.href = 'ingredients.html?ids=' + checked.join(',');
-    });
+    }
+
+    document.getElementById('show-ingredients').addEventListener('click', handleShowIngredients);
+    document.getElementById('show-ingredients-top').addEventListener('click', handleShowIngredients);
   </script>
 </body>
 </html>
