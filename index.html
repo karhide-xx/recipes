@@ -81,11 +81,17 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       transition: background 0.2s;
       display: block;
-      /* margin-left: auto;
-      margin-right: auto; */
+      margin-left: auto;
+      margin-right: auto;
     }
-
-    .show:hover  {
+    .show.top {
+      margin-top: 0;
+      margin-bottom: 2em;
+      font-size: 1em;
+      padding: 0.7em 1.5em;
+    }
+    .show:hover,
+    .show.top:hover {
       background: #145a8a;
     }
     @media (max-width: 600px) {
@@ -95,6 +101,7 @@
       .card img { max-height: 80px; }
       .select-recipe { top: 4px; left: 4px; }
       .show { font-size: 1.1em; padding: 0.7em 1.2em; }
+      .show.top { font-size: 0.9em; padding: 0.5em 1em; }
     }
   </style>
 </head>
@@ -106,6 +113,16 @@
   <button id="show-ingredients" class="show">List Selected Ingredients</button>
   <script>
     let allRecipes = [];
+    let selectedIds = new Set();
+
+    function handleCheckboxChange(e) {
+      const id = e.target.getAttribute('data-id');
+      if (e.target.checked) {
+        selectedIds.add(id);
+      } else {
+        selectedIds.delete(id);
+      }
+    }
 
     function renderRecipes(recipes) {
       const list = document.getElementById('recipe-list');
@@ -116,9 +133,15 @@
         let img = recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : '';
         let link = `<a class="card-title" href="recipe.html?id=${recipe.id}">${recipe.title}</a>`;
         let external = recipe.link ? `<a class="external-link" href="${recipe.link}" target="_blank" title="External link">[source]</a>` : '';
-        let checkbox = `<input type="checkbox" class="select-recipe" data-id="${recipe.id}">`;
+        let checked = selectedIds.has(String(recipe.id)) ? 'checked' : '';
+        let checkbox = `<input type="checkbox" class="select-recipe" data-id="${recipe.id}" ${checked}>`;
         li.innerHTML = checkbox + img + link + external;
         list.appendChild(li);
+      });
+
+      // Add event listeners to checkboxes
+      document.querySelectorAll('.select-recipe').forEach(cb => {
+        cb.addEventListener('change', handleCheckboxChange);
       });
     }
 
@@ -139,8 +162,7 @@
     });
 
     function handleShowIngredients() {
-      const checked = Array.from(document.querySelectorAll('.select-recipe:checked'))
-        .map(cb => cb.getAttribute('data-id'));
+      const checked = Array.from(selectedIds);
       if (checked.length === 0) {
         alert('Please select at least one recipe.');
         return;
