@@ -1,5 +1,5 @@
 {
-    "name": "worker-name",
+    "name": "recipes",
 	"compatibility_date": "2025-07-02",
 	"assets": {
 	    "directory": "./"
