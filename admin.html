@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-darker: #020408;
+      --panel-bg: rgba(22, 28, 45, 0.45);
+      --panel-border: rgba(255, 255, 255, 0.07);
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-glow: rgba(99, 102, 241, 0.35);
+      --success: #10b981;
+      --success-hover: #059669;
+      --success-glow: rgba(16, 185, 129, 0.35);
+      --danger: #f43f5e;
+      --danger-hover: #e11d48;
+      --danger-glow: rgba(244, 63, 94, 0.35);
+      --warning: #f59e0b;
+      --warning-hover: #d97706;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #475569;
+      --input-bg: rgba(10, 15, 26, 0.7);
+      --input-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #111827 0%, var(--bg-darker) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Authorization View */
+    .auth-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .auth-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .auth-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #a5b4fc, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .auth-card h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.025em;
+      background: linear-gradient(to right, #ffffff, var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .auth-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+      background: linear-gradient(135deg, #818cf8, #6366f1);
+    }
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 14px var(--success-glow);
+    }
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--success-glow);
+      background: linear-gradient(135deg, #34d399, #10b981);
+    }
+    .btn-success:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      color: white;
+      box-shadow: 0 4px 14px var(--danger-glow);
+    }
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--danger-glow);
+      background: linear-gradient(135deg, #fb7185, #f43f5e);
+    }
+    .btn-danger:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-primary);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+    .btn-secondary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      border-radius: 8px;
+    }
+
+    .alert-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      text-align: left;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Main Dashboard Layout */
+    .app-container {
+      display: none;
+      flex: 1;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 320px;
+      background: rgba(10, 15, 28, 0.6);
+      border-right: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      backdrop-filter: blur(8px);
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-area h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding-left: 2.2rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .recipe-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .recipe-item {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      gap: 0.75rem;
+      text-align: left;
+      background: transparent;
+      color: var(--text-primary);
+    }
+
+    .recipe-item:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .recipe-item.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .recipe-item img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .recipe-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .recipe-item-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.2rem;
+    }
+
+    .recipe-item-id {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      overflow-y: auto;
+      background: rgba(15, 23, 42, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Editor Form Styles */
+    .editor-container {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .editor-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 15, 28, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .editor-title-area h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .editor-form {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .form-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input, textarea, select {
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-primary);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    /* Image Preview Widget */
+    .image-preview-widget {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .image-preview-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1e293b;
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .image-preview-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-preview-placeholder {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    /* Ingredient Sections CSS */
+    .ingredient-section-card {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-drag-controls {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .ingredient-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .ingredient-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ingredient-row input {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .col-amount { width: 90px; flex-shrink: 0; }
+    .col-unit { width: 90px; flex-shrink: 0; }
+    .col-name { flex: 2; }
+    .col-note { flex: 2; }
+
+    /* Dynamic Lists (Instructions / Notes) */
+    .dynamic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .dynamic-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .dynamic-row textarea {
+      resize: vertical;
+      min-height: 50px;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .dynamic-number {
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 0.25rem;
+      align-self: center;
+      flex-shrink: 0;
+    }
+
+    .btn-icon {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-icon:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    .btn-icon-danger:hover {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 1000;
+    }
+
+    .toast {
+      background: #1e293b;
+      border-left: 4px solid var(--accent);
+      color: var(--text-primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 280px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-success {
+      border-left-color: var(--success);
+    }
+
+    .toast-error {
+      border-left-color: var(--danger);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .app-container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: 250px;
+        border-right: none;
+        border-bottom: 1px solid var(--panel-border);
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Authorization View -->
+  <div id="auth-view" class="auth-container">
+    <div class="auth-card">
+      <div class="auth-icon">⚙️</div>
+      <h1>Recipe Admin Dashboard</h1>
+      <p>
+        Welcome! To manage recipes locally, authorize this page to access the recipe project folder. Changes will be saved directly to your workspace.
+      </p>
+      <button class="btn btn-primary" id="btn-authorize">
+        📂 Select Recipes Folder
+      </button>
+      <div id="fs-support-warning" class="alert-box" style="display:none;">
+        <strong>API Support Required:</strong> The File System Access API is not supported in this context. 
+        Please ensure you are opening this page on <code>http://localhost</code> (e.g. using a dev server) and in a modern Chromium-based browser (Chrome, Edge, Opera, or Safari 15.2+).
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Layout -->
+  <div id="app-container" class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <h2>🍽️ Recipes Admin</h2>
+          <button class="btn btn-primary btn-sm" id="btn-new-recipe">+ New</button>
+        </div>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="recipe-search" placeholder="Search recipes...">
+        </div>
+      </div>
+      <div class="recipe-list" id="recipe-list-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state">
+        <div class="empty-state-icon">📝</div>
+        <h3>No Recipe Selected</h3>
+        <p>Choose a recipe from the list on the left to edit, or click "+ New" to create a brand new one.</p>
+      </div>
+
+      <!-- Editor Card -->
+      <div id="editor-container" class="editor-container">
+        <div class="editor-header">
+          <div class="editor-title-area">
+            <h2 id="editor-title-label">Edit Recipe</h2>
+          </div>
+          <div class="editor-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-discard">Reset</button>
+            <button class="btn btn-danger btn-sm" id="btn-delete">Delete</button>
+            <button class="btn btn-success btn-sm" id="btn-save">💾 Save Changes</button>
+          </div>
+        </div>
+
+        <div class="editor-form">
+          
+          <!-- General Information -->
+          <div class="form-card">
+            <div class="form-card-title">General Info</div>
+            
+            <div class="form-group">
+              <label for="recipe-title-input">Recipe Title *</label>
+              <input type="text" id="recipe-title-input" required placeholder="e.g., Creamy Garlic Butter Shrimp">
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="recipe-serves-input">Serves</label>
+                <input type="text" id="recipe-serves-input" placeholder="e.g., 4 or 2-3">
+              </div>
+              <div class="form-group">
+                <label for="recipe-prep-input">Prep Time</label>
+                <input type="text" id="recipe-prep-input" placeholder="e.g., 15 minutes">
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="recipe-cook-input">Cook Time</label>
+                <input type="text" id="recipe-cook-input" placeholder="e.g., 20 minutes">
+              </div>
+              <div class="form-group">
+                <label for="recipe-total-input">Total Time</label>
+                <input type="text" id="recipe-total-input" placeholder="e.g., 35 minutes">
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="recipe-source-input">Source URL</label>
+                <input type="url" id="recipe-source-input" placeholder="e.g., https://example.com/recipe">
+              </div>
+              <div class="form-group">
+                <label for="recipe-link-input">Link URL</label>
+                <input type="url" id="recipe-link-input" placeholder="e.g., https://example.com/more-details">
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Selection & Auto Upload -->
+          <div class="form-card">
+            <div class="form-card-title">Recipe Image</div>
+            <div class="image-preview-widget">
+              <div class="image-preview-container">
+                <img id="image-preview-el" src="" alt="" style="display:none;">
+                <div id="image-preview-placeholder" class="image-preview-placeholder">No Image Selected</div>
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 0.75rem;">
+                <div class="form-group">
+                  <label for="recipe-image-input">Image Path</label>
+                  <input type="text" id="recipe-image-input" placeholder="images/filename.jpg">
+                </div>
+                <div>
+                  <input type="file" id="file-upload-input" accept="image/*" style="display:none;">
+                  <button class="btn btn-secondary btn-sm" id="btn-trigger-upload">📷 Upload & Copy Image</button>
+                  <span id="upload-status-lbl" style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 0.5rem;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ingredients Section -->
+          <div class="form-card">
+            <div class="form-card-title">
+              <span>Ingredients</span>
+              <button class="btn btn-secondary btn-sm" id="btn-add-section">+ Add Section</button>
+            </div>
+            
+            <div id="ingredients-sections-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Instructions Section -->
+          <div class="form-card">
+            <div class="form-card-title">
+              <span>Instructions</span>
+              <button class="btn btn-secondary btn-sm" id="btn-add-instruction">+ Add Step</button>
+            </div>
+            <div class="dynamic-list" id="instructions-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Notes Section -->
+          <div class="form-card">
+            <div class="form-card-title">
+              <span>Notes</span>
+              <button class="btn btn-secondary btn-sm" id="btn-add-note">+ Add Note</button>
+            </div>
+            <div class="dynamic-list" id="notes-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Containers -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script>
+    // State Variables
+    let dirHandle = null;
+    let publicDirHandle = null;   // Reference to public/ directory
+    let isRootSelected = true;    // True if root folder is selected, false if public/ is selected
+    let recipesIndex = [];
+    let activeRecipe = null;      // Holds the working copy of active recipe
+    let originalRecipe = null;    // Holds copy of active recipe as loaded from file
+    let pendingImageFile = null;  // Stores File object chosen through input until saved
+    let activeRecipeId = null;    // Numeric ID
+
+    // Check API Support
+    const fsSupported = 'showDirectoryPicker' in window;
+    if (!fsSupported) {
+      document.getElementById('fs-support-warning').style.display = 'block';
+      document.getElementById('btn-authorize').disabled = true;
+    }
+
+    // Permission Verification Helper
+    async function verifyPermission(handle, readWrite) {
+      const opts = {};
+      if (readWrite) opts.mode = 'readwrite';
+      try {
+        if ((await handle.queryPermission(opts)) === 'granted') return true;
+        if ((await handle.requestPermission(opts)) === 'granted') return true;
+      } catch (err) {
+        console.error('Permission verification failed:', err);
+      }
+      return false;
+    }
+
+    // Toast Notifications
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> <span>${message}</span>`;
+      container.appendChild(toast);
+      
+      // Force repaint to trigger CSS animation
+      toast.offsetHeight;
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // IndexedDB Handle Storage
+    const DB_NAME = 'RecipeAdminDB';
+    const STORE_NAME = 'handles';
+    const KEY_NAME = 'projectDir';
+
+    function getDB() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, 1);
+        request.onupgradeneeded = (e) => {
+          e.target.result.createObjectStore(STORE_NAME);
+        };
+        request.onsuccess = (e) => resolve(e.target.result);
+        request.onerror = (e) => reject(e.target.error);
+      });
+    }
+
+    async function saveHandle(handle) {
+      const db = await getDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.put(handle, KEY_NAME);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function loadHandle() {
+      const db = await getDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readonly');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.get(KEY_NAME);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    // Initialize state
+    async function initializeDir(handle) {
+      dirHandle = handle;
+      
+      // 100% robust directory detection:
+      // Try to find recipes.json directly in the selected folder
+      let isRecipesJsonDirect = false;
+      try {
+        await dirHandle.getFileHandle('recipes.json');
+        isRecipesJsonDirect = true;
+      } catch (e) {
+        isRecipesJsonDirect = false;
+      }
+
+      if (isRecipesJsonDirect) {
+        // Selected folder is 'public' itself
+        publicDirHandle = dirHandle;
+        isRootSelected = false;
+      } else {
+        // Try to find recipes.json inside 'public' subfolder
+        let hasPublicWithRecipes = false;
+        let publicSub = null;
+        try {
+          publicSub = await dirHandle.getDirectoryHandle('public');
+          await publicSub.getFileHandle('recipes.json');
+          hasPublicWithRecipes = true;
+        } catch (e) {
+          hasPublicWithRecipes = false;
+        }
+
+        if (hasPublicWithRecipes) {
+          publicDirHandle = publicSub;
+          isRootSelected = true;
+        } else {
+          // Fallback: assume selected folder is the intended directory
+          publicDirHandle = dirHandle;
+          isRootSelected = false;
+        }
+      }
+
+      await loadRecipes();
+      document.getElementById('auth-view').style.display = 'none';
+      document.getElementById('app-container').style.display = 'flex';
+    }
+
+    // Update Auth view for reconnecting saved folder
+    function updateAuthUIForSavedHandle(handleName) {
+      const p = document.querySelector('#auth-view p');
+      p.innerHTML = `You have previously selected the folder: <strong>${handleName}</strong>.<br>Click below to reconnect and resume managing your recipes.`;
+      
+      const btn = document.getElementById('btn-authorize');
+      btn.innerHTML = `📂 Reconnect to "${handleName}"`;
+      btn.dataset.mode = 'reconnect';
+      
+      // Add a select different link if not already created
+      if (!document.getElementById('diff-folder-link')) {
+        const linkDiv = document.createElement('div');
+        linkDiv.id = 'diff-folder-link';
+        linkDiv.style.marginTop = '1.2rem';
+        linkDiv.innerHTML = `<a href="#" id="btn-select-different" style="color: var(--text-secondary); font-size: 0.9rem; text-decoration: underline;">Select a different folder</a>`;
+        btn.parentNode.insertBefore(linkDiv, btn.nextSibling);
+        
+        document.getElementById('btn-select-different').addEventListener('click', async (e) => {
+          e.preventDefault();
+          await selectNewFolder();
+        });
+      }
+    }
+
+    // Select different folder Picker logic
+    async function selectNewFolder() {
+      try {
+        const handle = await window.showDirectoryPicker();
+        const hasWrite = await verifyPermission(handle, true);
+        if (!hasWrite) {
+          showToast('Write permission is required to save changes.', 'error');
+          return;
+        }
+        
+        // Save handle to IndexedDB (non-fatal catch to support Incognito/Private mode)
+        try {
+          await saveHandle(handle);
+        } catch (dbErr) {
+          console.warn('IndexedDB failed to save directory handle:', dbErr);
+        }
+        
+        await initializeDir(handle);
+        showToast('Connected to Recipes Directory!');
+      } catch (err) {
+        console.error(err);
+        showToast('Error selecting folder: ' + err.message, 'error');
+      }
+    }
+
+    // Auto-select handle on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const savedHandle = await loadHandle();
+        if (savedHandle) {
+          // Check permission status silently without prompting (non-gesture)
+          const permission = await savedHandle.queryPermission({ mode: 'readwrite' });
+          if (permission === 'granted') {
+            // Authorized in current browser session, load recipes automatically
+            await initializeDir(savedHandle);
+            showToast('Automatically connected to Recipes Folder!');
+            return;
+          } else {
+            // Needs gesture authorization, upgrade button text to Reconnect mode
+            updateAuthUIForSavedHandle(savedHandle.name);
+          }
+        }
+      } catch (err) {
+        console.warn('Failed to auto-load directory handle from IndexedDB:', err);
+      }
+      
+      // Otherwise, show the normal folder select screen
+      document.getElementById('auth-view').style.display = 'flex';
+    });
+
+    // Authorize button click handler
+    document.getElementById('btn-authorize').addEventListener('click', async () => {
+      const btn = document.getElementById('btn-authorize');
+      if (btn.dataset.mode === 'reconnect') {
+        // Reconnect mode: user-gesture requestPermission
+        try {
+          const savedHandle = await loadHandle();
+          if (savedHandle) {
+            const hasWrite = await verifyPermission(savedHandle, true);
+            if (hasWrite) {
+              await initializeDir(savedHandle);
+              showToast('Connected to Recipes Directory!');
+            } else {
+              showToast('Write permission is required to save changes.', 'error');
+            }
+          } else {
+            // Fallback if handle deleted
+            await selectNewFolder();
+          }
+        } catch (err) {
+          console.error(err);
+          showToast('Failed to reconnect: ' + err.message, 'error');
+        }
+      } else {
+        // Normal mode: select a new folder from file explorer
+        await selectNewFolder();
+      }
+    });
+
+    // Load Recipes Index
+    async function loadRecipes() {
+      try {
+        const fileHandle = await publicDirHandle.getFileHandle('recipes.json');
+        const file = await fileHandle.getFile();
+        const text = await file.text();
+        recipesIndex = JSON.parse(text);
+        renderRecipeList();
+      } catch (err) {
+        console.error(err);
+        showToast('Error loading recipes.json: ' + err.message, 'error');
+      }
+    }
+
+    // Sidebar Render
+    function renderRecipeList() {
+      const searchVal = document.getElementById('recipe-search').value.toLowerCase();
+      const container = document.getElementById('recipe-list-container');
+      container.innerHTML = '';
+
+      const filtered = recipesIndex.filter(r => r.title.toLowerCase().includes(searchVal));
+
+      filtered.forEach(recipe => {
+        const item = document.createElement('button');
+        item.className = 'recipe-item';
+        if (activeRecipeId === recipe.id) item.classList.add('active');
+
+        const img = document.createElement('img');
+        if (recipe.image) {
+          img.src = isRootSelected ? 'public/' + recipe.image : recipe.image;
+        } else {
+          img.src = '';
+        }
+        img.alt = recipe.title;
+        img.onerror = () => { img.style.display = 'none'; };
+
+        const info = document.createElement('div');
+        info.className = 'recipe-item-info';
+        
+        const title = document.createElement('div');
+        title.className = 'recipe-item-title';
+        title.textContent = recipe.title;
+
+        const idSpan = document.createElement('div');
+        idSpan.className = 'recipe-item-id';
+        idSpan.textContent = `ID: ${recipe.id}`;
+
+        info.appendChild(title);
+        info.appendChild(idSpan);
+        item.appendChild(img);
+        item.appendChild(info);
+
+        item.addEventListener('click', () => selectRecipe(recipe.id));
+        container.appendChild(item);
+      });
+    }
+
+    // Search bar listener
+    document.getElementById('recipe-search').addEventListener('input', renderRecipeList);
+
+    // Select Recipe for editing
+    async function selectRecipe(id) {
+      try {
+        activeRecipeId = id;
+        
+        // Highlight in sidebar
+        const items = document.querySelectorAll('.recipe-item');
+        items.forEach(it => it.classList.remove('active'));
+        renderRecipeList();
+
+        const jsonDir = await publicDirHandle.getDirectoryHandle('recipes-json');
+        const fileHandle = await jsonDir.getFileHandle(`${id}.json`);
+        const file = await fileHandle.getFile();
+        const text = await file.text();
+        
+        originalRecipe = JSON.parse(text);
+        activeRecipe = JSON.parse(text); // clone working copy
+        pendingImageFile = null;
+        document.getElementById('upload-status-lbl').textContent = '';
+
+        loadRecipeToForm();
+      } catch (err) {
+        console.error(err);
+        showToast(`Failed to load recipe JSON file (${id}.json)`, 'error');
+      }
+    }
+
+    // Form population
+    function loadRecipeToForm() {
+      document.getElementById('empty-state').style.display = 'none';
+      document.getElementById('editor-container').style.display = 'flex';
+      document.getElementById('editor-title-label').textContent = `Edit Recipe #${activeRecipeId}`;
+
+      // Populate text controls
+      document.getElementById('recipe-title-input').value = activeRecipe.title || '';
+      document.getElementById('recipe-serves-input').value = activeRecipe.serves || '';
+      document.getElementById('recipe-prep-input').value = activeRecipe.prep_time || '';
+      document.getElementById('recipe-cook-input').value = activeRecipe.cook_time || '';
+      document.getElementById('recipe-total-input').value = activeRecipe.total_time || '';
+      document.getElementById('recipe-source-input').value = activeRecipe.source || '';
+      document.getElementById('recipe-link-input').value = activeRecipe.link || '';
+      document.getElementById('recipe-image-input').value = activeRecipe.image || '';
+
+      // Image Preview
+      updateImagePreview(activeRecipe.image);
+
+      // Ingredients
+      renderIngredientsEditor();
+
+      // Instructions
+      renderInstructionsEditor();
+
+      // Notes
+      renderNotesEditor();
+    }
+
+    function updateImagePreview(imagePath) {
+      const previewImg = document.getElementById('image-preview-el');
+      const placeholder = document.getElementById('image-preview-placeholder');
+      
+      if (imagePath) {
+        if (imagePath.startsWith('blob:') || imagePath.startsWith('data:')) {
+          previewImg.src = imagePath;
+        } else {
+          previewImg.src = isRootSelected ? 'public/' + imagePath : imagePath;
+        }
+        previewImg.style.display = 'block';
+        placeholder.style.display = 'none';
+      } else {
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+        placeholder.style.display = 'block';
+      }
+    }
+
+    // Image Upload triggers
+    document.getElementById('btn-trigger-upload').addEventListener('click', () => {
+      document.getElementById('file-upload-input').click();
+    });
+
+    document.getElementById('file-upload-input').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        pendingImageFile = file;
+        const localURL = URL.createObjectURL(file);
+        document.getElementById('image-preview-el').src = localURL;
+        document.getElementById('image-preview-el').style.display = 'block';
+        document.getElementById('image-preview-placeholder').style.display = 'none';
+        
+        // Auto update input text path to images/
+        const finalPath = `images/${file.name}`;
+        document.getElementById('recipe-image-input').value = finalPath;
+        document.getElementById('upload-status-lbl').textContent = `Ready to copy: ${file.name}`;
+        showToast(`Selected image: ${file.name}. It will be saved into the project's images/ folder upon clicking Save.`);
+      }
+    });
+
+    // Raw input changes for image path
+    document.getElementById('recipe-image-input').addEventListener('input', (e) => {
+      updateImagePreview(e.target.value);
+    });
+
+    /* Ingredients Structure: Flat vs Sectioned */
+    // Helper to construct normalized data structures
+    function getNormalizedIngredients() {
+      const data = activeRecipe.ingredients;
+      if (!data) return [{ name: '', list: [] }];
+      
+      if (Array.isArray(data)) {
+        return [{ name: '', list: data }];
+      } else if (typeof data === 'object') {
+        return Object.entries(data).map(([secName, list]) => {
+          const humanName = secName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+          return { name: humanName, list: Array.isArray(list) ? list : [] };
+        });
+      }
+      return [{ name: '', list: [] }];
+    }
+
+    function renderIngredientsEditor() {
+      const sections = getNormalizedIngredients();
+      const container = document.getElementById('ingredients-sections-container');
+      container.innerHTML = '';
+
+      sections.forEach((sec, sIdx) => {
+        const secCard = document.createElement('div');
+        secCard.className = 'ingredient-section-card';
+        secCard.dataset.index = sIdx;
+
+        // Header for section name and reorder/delete
+        const header = document.createElement('div');
+        header.className = 'section-header-row';
+
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.className = 'section-title-input';
+        nameInput.placeholder = 'Section name (e.g., Salad, Dressing - leave empty for flat list)';
+        nameInput.value = sec.name;
+        nameInput.addEventListener('input', (e) => updateIngredientSectionName(sIdx, e.target.value));
+
+        const dragCtrl = document.createElement('div');
+        dragCtrl.className = 'section-drag-controls';
+
+        const btnUp = document.createElement('button');
+        btnUp.className = 'btn-icon';
+        btnUp.innerHTML = '▲';
+        btnUp.title = 'Move section up';
+        btnUp.disabled = sIdx === 0;
+        btnUp.onclick = () => moveIngredientSection(sIdx, -1);
+
+        const btnDown = document.createElement('button');
+        btnDown.className = 'btn-icon';
+        btnDown.innerHTML = '▼';
+        btnDown.title = 'Move section down';
+        btnDown.disabled = sIdx === sections.length - 1;
+        btnDown.onclick = () => moveIngredientSection(sIdx, 1);
+
+        const btnDelete = document.createElement('button');
+        btnDelete.className = 'btn-icon btn-icon-danger';
+        btnDelete.innerHTML = '🗑️';
+        btnDelete.title = 'Delete Section';
+        btnDelete.onclick = () => deleteIngredientSection(sIdx);
+
+        dragCtrl.appendChild(btnUp);
+        dragCtrl.appendChild(btnDown);
+        dragCtrl.appendChild(btnDelete);
+
+        header.appendChild(nameInput);
+        header.appendChild(dragCtrl);
+        secCard.appendChild(header);
+
+        // Ingredients rows
+        const listDiv = document.createElement('div');
+        listDiv.className = 'ingredient-list';
+
+        sec.list.forEach((ing, iIdx) => {
+          const row = document.createElement('div');
+          row.className = 'ingredient-row';
+
+          const inputAmt = document.createElement('input');
+          inputAmt.type = 'text';
+          inputAmt.className = 'col-amount';
+          inputAmt.placeholder = 'Qty';
+          inputAmt.value = ing.amount || '';
+          inputAmt.addEventListener('input', (e) => updateIngredientItem(sIdx, iIdx, 'amount', e.target.value));
+
+          const inputUnit = document.createElement('input');
+          inputUnit.type = 'text';
+          inputUnit.className = 'col-unit';
+          inputUnit.placeholder = 'Unit';
+          inputUnit.value = ing.unit || '';
+          inputUnit.addEventListener('input', (e) => updateIngredientItem(sIdx, iIdx, 'unit', e.target.value));
+
+          const inputName = document.createElement('input');
+          inputName.type = 'text';
+          inputName.className = 'col-name';
+          inputName.placeholder = 'Ingredient Name *';
+          inputName.value = ing.ingredient || '';
+          inputName.required = true;
+          inputName.addEventListener('input', (e) => updateIngredientItem(sIdx, iIdx, 'ingredient', e.target.value));
+
+          const inputNote = document.createElement('input');
+          inputNote.type = 'text';
+          inputNote.className = 'col-note';
+          inputNote.placeholder = 'Note (e.g. toasted)';
+          inputNote.value = ing.note || '';
+          inputNote.addEventListener('input', (e) => updateIngredientItem(sIdx, iIdx, 'note', e.target.value));
+
+          const rowCtrl = document.createElement('div');
+          rowCtrl.className = 'row-actions';
+
+          const rowUp = document.createElement('button');
+          rowUp.className = 'btn-icon';
+          rowUp.innerHTML = '▲';
+          rowUp.disabled = iIdx === 0;
+          rowUp.onclick = () => moveIngredientItem(sIdx, iIdx, -1);
+
+          const rowDown = document.createElement('button');
+          rowDown.className = 'btn-icon';
+          rowDown.innerHTML = '▼';
+          rowDown.disabled = iIdx === sec.list.length - 1;
+          rowDown.onclick = () => moveIngredientItem(sIdx, iIdx, 1);
+
+          const rowDel = document.createElement('button');
+          rowDel.className = 'btn-icon btn-icon-danger';
+          rowDel.innerHTML = '✕';
+          rowDel.onclick = () => deleteIngredientItem(sIdx, iIdx);
+
+          rowCtrl.appendChild(rowUp);
+          rowCtrl.appendChild(rowDown);
+          rowCtrl.appendChild(rowDel);
+
+          row.appendChild(inputAmt);
+          row.appendChild(inputUnit);
+          row.appendChild(inputName);
+          row.appendChild(inputNote);
+          row.appendChild(rowCtrl);
+
+          listDiv.appendChild(row);
+        });
+
+        secCard.appendChild(listDiv);
+
+        // Add Ingredient Button for this section
+        const btnAddIng = document.createElement('button');
+        btnAddIng.className = 'btn btn-secondary btn-sm';
+        btnAddIng.style.alignSelf = 'flex-start';
+        btnAddIng.innerHTML = '+ Add Ingredient';
+        btnAddIng.onclick = () => addIngredientItem(sIdx);
+        secCard.appendChild(btnAddIng);
+
+        container.appendChild(secCard);
+      });
+    }
+
+    // Section modifiers
+    function updateIngredientSectionName(sIdx, val) {
+      const sections = getNormalizedIngredients();
+      sections[sIdx].name = val;
+      serializeIngredientsBack(sections);
+    }
+
+    function moveIngredientSection(sIdx, dir) {
+      const sections = getNormalizedIngredients();
+      const temp = sections[sIdx];
+      sections[sIdx] = sections[sIdx + dir];
+      sections[sIdx + dir] = temp;
+      serializeIngredientsBack(sections);
+      renderIngredientsEditor();
+    }
+
+    function deleteIngredientSection(sIdx) {
+      if (!confirm('Are you sure you want to delete this entire ingredients section?')) return;
+      const sections = getNormalizedIngredients();
+      sections.splice(sIdx, 1);
+      serializeIngredientsBack(sections);
+      renderIngredientsEditor();
+    }
+
+    document.getElementById('btn-add-section').addEventListener('click', () => {
+      const sections = getNormalizedIngredients();
+      sections.push({ name: `Section ${sections.length + 1}`, list: [] });
+      serializeIngredientsBack(sections);
+      renderIngredientsEditor();
+    });
+
+    // Ingredient item modifiers
+    function updateIngredientItem(sIdx, iIdx, field, val) {
+      const sections = getNormalizedIngredients();
+      sections[sIdx].list[iIdx][field] = val;
+      serializeIngredientsBack(sections);
+    }
+
+    function addIngredientItem(sIdx) {
+      const sections = getNormalizedIngredients();
+      sections[sIdx].list.push({ amount: '', unit: '', ingredient: '', note: '' });
+      serializeIngredientsBack(sections);
+      renderIngredientsEditor();
+    }
+
+    function deleteIngredientItem(sIdx, iIdx) {
+      const sections = getNormalizedIngredients();
+      sections[sIdx].list.splice(iIdx, 1);
+      serializeIngredientsBack(sections);
+      renderIngredientsEditor();
+    }
+
+    function moveIngredientItem(sIdx, iIdx, dir) {
+      const sections = getNormalizedIngredients();
+      const temp = sections[sIdx].list[iIdx];
+      sections[sIdx].list[iIdx] = sections[sIdx].list[iIdx + dir];
+      sections[sIdx].list[iIdx + dir] = temp;
+      serializeIngredientsBack(sections);
+      renderIngredientsEditor();
+    }
+
+    // Convert sectioned structure back to target JSON schema (flat array or sectioned object)
+    function serializeIngredientsBack(sections) {
+      if (sections.length === 1 && (!sections[0].name || sections[0].name.trim() === '')) {
+        activeRecipe.ingredients = sections[0].list;
+      } else {
+        const obj = {};
+        sections.forEach(sec => {
+          const key = sec.name.trim().toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/[^a-z0-9_]/g, '');
+          obj[key || 'ingredients'] = sec.list;
+        });
+        activeRecipe.ingredients = obj;
+      }
+    }
+
+
+    /* Instructions Editor */
+    function renderInstructionsEditor() {
+      const container = document.getElementById('instructions-container');
+      container.innerHTML = '';
+      const list = activeRecipe.instructions || [];
+
+      list.forEach((step, idx) => {
+        const row = document.createElement('div');
+        row.className = 'dynamic-row';
+
+        const num = document.createElement('div');
+        num.className = 'dynamic-number';
+        num.textContent = idx + 1;
+
+        const textarea = document.createElement('textarea');
+        textarea.placeholder = `Step ${idx + 1} instructions...`;
+        textarea.value = step;
+        textarea.addEventListener('input', (e) => {
+          activeRecipe.instructions[idx] = e.target.value;
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'row-actions';
+
+        const btnUp = document.createElement('button');
+        btnUp.className = 'btn-icon';
+        btnUp.innerHTML = '▲';
+        btnUp.disabled = idx === 0;
+        btnUp.onclick = () => {
+          const temp = activeRecipe.instructions[idx];
+          activeRecipe.instructions[idx] = activeRecipe.instructions[idx - 1];
+          activeRecipe.instructions[idx - 1] = temp;
+          renderInstructionsEditor();
+        };
+
+        const btnDown = document.createElement('button');
+        btnDown.className = 'btn-icon';
+        btnDown.innerHTML = '▼';
+        btnDown.disabled = idx === list.length - 1;
+        btnDown.onclick = () => {
+          const temp = activeRecipe.instructions[idx];
+          activeRecipe.instructions[idx] = activeRecipe.instructions[idx + 1];
+          activeRecipe.instructions[idx + 1] = temp;
+          renderInstructionsEditor();
+        };
+
+        const btnDel = document.createElement('button');
+        btnDel.className = 'btn-icon btn-icon-danger';
+        btnDel.innerHTML = '✕';
+        btnDel.onclick = () => {
+          activeRecipe.instructions.splice(idx, 1);
+          renderInstructionsEditor();
+        };
+
+        actions.appendChild(btnUp);
+        actions.appendChild(btnDown);
+        actions.appendChild(btnDel);
+
+        row.appendChild(num);
+        row.appendChild(textarea);
+        row.appendChild(actions);
+
+        container.appendChild(row);
+      });
+    }
+
+    document.getElementById('btn-add-instruction').addEventListener('click', () => {
+      if (!activeRecipe.instructions) activeRecipe.instructions = [];
+      activeRecipe.instructions.push('');
+      renderInstructionsEditor();
+    });
+
+
+    /* Notes Editor */
+    function renderNotesEditor() {
+      const container = document.getElementById('notes-container');
+      container.innerHTML = '';
+      
+      let list = [];
+      if (typeof activeRecipe.notes === 'string') {
+        list = [activeRecipe.notes];
+      } else if (Array.isArray(activeRecipe.notes)) {
+        list = activeRecipe.notes;
+      }
+
+      list.forEach((note, idx) => {
+        const row = document.createElement('div');
+        row.className = 'dynamic-row';
+
+        const num = document.createElement('div');
+        num.className = 'dynamic-number';
+        num.textContent = idx + 1;
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Note ${idx + 1}...`;
+        input.value = note;
+        input.addEventListener('input', (e) => {
+          if (Array.isArray(activeRecipe.notes)) {
+            activeRecipe.notes[idx] = e.target.value;
+          } else {
+            activeRecipe.notes = [e.target.value];
+          }
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'row-actions';
+
+        const btnUp = document.createElement('button');
+        btnUp.className = 'btn-icon';
+        btnUp.innerHTML = '▲';
+        btnUp.disabled = idx === 0;
+        btnUp.onclick = () => {
+          const temp = list[idx];
+          list[idx] = list[idx - 1];
+          list[idx - 1] = temp;
+          activeRecipe.notes = list;
+          renderNotesEditor();
+        };
+
+        const btnDown = document.createElement('button');
+        btnDown.className = 'btn-icon';
+        btnDown.innerHTML = '▼';
+        btnDown.disabled = idx === list.length - 1;
+        btnDown.onclick = () => {
+          const temp = list[idx];
+          list[idx] = list[idx + 1];
+          list[idx + 1] = temp;
+          activeRecipe.notes = list;
+          renderNotesEditor();
+        };
+
+        const btnDel = document.createElement('button');
+        btnDel.className = 'btn-icon btn-icon-danger';
+        btnDel.innerHTML = '✕';
+        btnDel.onclick = () => {
+          list.splice(idx, 1);
+          activeRecipe.notes = list;
+          renderNotesEditor();
+        };
+
+        actions.appendChild(btnUp);
+        actions.appendChild(btnDown);
+        actions.appendChild(btnDel);
+
+        row.appendChild(num);
+        row.appendChild(input);
+        row.appendChild(actions);
+
+        container.appendChild(row);
+      });
+    }
+
+    document.getElementById('btn-add-note').addEventListener('click', () => {
+      if (!activeRecipe.notes) activeRecipe.notes = [];
+      if (typeof activeRecipe.notes === 'string') {
+        activeRecipe.notes = [activeRecipe.notes];
+      }
+      activeRecipe.notes.push('');
+      renderNotesEditor();
+    });
+
+
+    /* Reset form */
+    document.getElementById('btn-discard').addEventListener('click', () => {
+      if (!confirm('Are you sure you want to discard unsaved changes?')) return;
+      activeRecipe = JSON.parse(JSON.stringify(originalRecipe));
+      pendingImageFile = null;
+      document.getElementById('upload-status-lbl').textContent = '';
+      loadRecipeToForm();
+      showToast('Changes reset to last saved state.');
+    });
+
+    /* New Recipe Creator */
+    document.getElementById('btn-new-recipe').addEventListener('click', () => {
+      const nextId = recipesIndex.length > 0 
+        ? Math.max(...recipesIndex.map(r => r.id)) + 1 
+        : 1;
+      
+      activeRecipeId = nextId;
+      originalRecipe = {
+        title: 'New Recipe',
+        source: '',
+        image: '',
+        link: '',
+        ingredients: [],
+        instructions: [],
+        notes: []
+      };
+      
+      activeRecipe = JSON.parse(JSON.stringify(originalRecipe));
+      pendingImageFile = null;
+      document.getElementById('upload-status-lbl').textContent = '';
+
+      loadRecipeToForm();
+      document.getElementById('editor-title-label').textContent = `Create New Recipe #${nextId}`;
+      showToast(`Created draft recipe #${nextId}. Enter details and click Save.`);
+    });
+
+
+    /* Save Changes */
+    document.getElementById('btn-save').addEventListener('click', async () => {
+      const title = document.getElementById('recipe-title-input').value.trim();
+      if (!title) {
+        showToast('Recipe Title is required.', 'error');
+        return;
+      }
+
+      // Read form metadata values back into activeRecipe
+      activeRecipe.title = title;
+      
+      const servesVal = document.getElementById('recipe-serves-input').value.trim();
+      if (servesVal) {
+        const parsed = parseInt(servesVal, 10);
+        activeRecipe.serves = String(parsed) === servesVal ? parsed : servesVal;
+      } else {
+        delete activeRecipe.serves;
+      }
+
+      const prepVal = document.getElementById('recipe-prep-input').value.trim();
+      if (prepVal) activeRecipe.prep_time = prepVal; else delete activeRecipe.prep_time;
+
+      const cookVal = document.getElementById('recipe-cook-input').value.trim();
+      if (cookVal) activeRecipe.cook_time = cookVal; else delete activeRecipe.cook_time;
+
+      const totalVal = document.getElementById('recipe-total-input').value.trim();
+      if (totalVal) activeRecipe.total_time = totalVal; else delete activeRecipe.total_time;
+
+      const sourceVal = document.getElementById('recipe-source-input').value.trim();
+      if (sourceVal) activeRecipe.source = sourceVal; else delete activeRecipe.source;
+
+      const linkVal = document.getElementById('recipe-link-input').value.trim();
+      if (linkVal) activeRecipe.link = linkVal; else delete activeRecipe.link;
+
+      const imageVal = document.getElementById('recipe-image-input').value.trim();
+      if (imageVal) activeRecipe.image = imageVal; else delete activeRecipe.image;
+
+      if (activeRecipe.instructions) {
+        activeRecipe.instructions = activeRecipe.instructions.filter(i => i.trim() !== '');
+      }
+      if (Array.isArray(activeRecipe.notes)) {
+        activeRecipe.notes = activeRecipe.notes.filter(n => n.trim() !== '');
+      }
+
+      const sections = getNormalizedIngredients();
+      sections.forEach(sec => {
+        sec.list = sec.list.filter(ing => ing.ingredient && ing.ingredient.trim() !== '');
+      });
+      serializeIngredientsBack(sections);
+
+      try {
+        // 1. Copy image file if pending
+        if (pendingImageFile) {
+          const imagesDir = await publicDirHandle.getDirectoryHandle('images', { create: true });
+          const imgHandle = await imagesDir.getFileHandle(pendingImageFile.name, { create: true });
+          const imgWritable = await imgHandle.createWritable();
+          await imgWritable.write(pendingImageFile);
+          await imgWritable.close();
+          
+          pendingImageFile = null;
+          document.getElementById('upload-status-lbl').textContent = '';
+        }
+
+        // 2. Write individual detailed JSON file recipes-json/<id>.json
+        const jsonDir = await publicDirHandle.getDirectoryHandle('recipes-json', { create: true });
+        const recipeFileHandle = await jsonDir.getFileHandle(`${activeRecipeId}.json`, { create: true });
+        const recipeWritable = await recipeFileHandle.createWritable();
+        await recipeWritable.write(JSON.stringify(activeRecipe, null, 2));
+        await recipeWritable.close();
+
+        // 3. Update the global index recipes.json
+        const indexEntryIdx = recipesIndex.findIndex(r => r.id === activeRecipeId);
+        const indexEntry = {
+          id: activeRecipeId,
+          title: activeRecipe.title,
+          image: activeRecipe.image || ''
+        };
+
+        if (indexEntryIdx >= 0) {
+          recipesIndex[indexEntryIdx] = indexEntry;
+        } else {
+          recipesIndex.push(indexEntry);
+        }
+
+        recipesIndex.sort((a, b) => a.id - b.id);
+
+        const indexFileHandle = await publicDirHandle.getFileHandle('recipes.json', { create: true });
+        const indexWritable = await indexFileHandle.createWritable();
+        await indexWritable.write(JSON.stringify(recipesIndex, null, 2));
+        await indexWritable.close();
+
+        originalRecipe = JSON.parse(JSON.stringify(activeRecipe));
+
+        renderRecipeList();
+        loadRecipeToForm();
+
+        showToast(`Recipe #${activeRecipeId} Saved successfully!`);
+      } catch (err) {
+        console.error(err);
+        showToast('Error saving changes: ' + err.message, 'error');
+      }
+    });
+
+    /* Delete Recipe */
+    document.getElementById('btn-delete').addEventListener('click', async () => {
+      const confirmMsg = `Are you sure you want to permanently delete recipe #${activeRecipeId} ("${activeRecipe.title}")?`;
+      if (!confirm(confirmMsg)) return;
+
+      try {
+        const jsonDir = await publicDirHandle.getDirectoryHandle('recipes-json');
+        await jsonDir.removeEntry(`${activeRecipeId}.json`).catch(err => {
+          console.warn('Recipe file delete warning:', err);
+        });
+
+        recipesIndex = recipesIndex.filter(r => r.id !== activeRecipeId);
+        const indexFileHandle = await publicDirHandle.getFileHandle('recipes.json', { create: true });
+        const indexWritable = await indexFileHandle.createWritable();
+        await indexWritable.write(JSON.stringify(recipesIndex, null, 2));
+        await indexWritable.close();
+
+        showToast(`Recipe #${activeRecipeId} Deleted.`);
+
+        activeRecipeId = null;
+        activeRecipe = null;
+        originalRecipe = null;
+        pendingImageFile = null;
+
+        document.getElementById('editor-container').style.display = 'none';
+        document.getElementById('empty-state').style.display = 'flex';
+        
+        renderRecipeList();
+      } catch (err) {
+        console.error(err);
+        showToast('Error deleting recipe: ' + err.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>
