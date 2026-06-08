@@ -144,28 +144,5 @@
       "dinner",
       "soup"
     ]
-  },
-  {
-    "id": 17,
-    "title": "Spiced carrot & lentil soup",
-    "image": "images/17.jpg",
-    "tags": [
-      "lunch",
-      "dinner",
-      "soup"
-    ]
-  },
-  {
-    "id": 18,
-    "title": "Easy classic lasagne",
-    "image": "images/18.jpg",
-    "tags": [
-      "dinner",
-      "lunch",
-      "main course",
-      "pasta",
-      "supper",
-      "italian"
-    ]
   }
 ]
