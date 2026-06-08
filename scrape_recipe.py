@@ -187,6 +187,36 @@ def main():
     else:
         instructions = [step.strip() for step in scraper.instructions().split('\n') if step.strip()]
         
+    # Extract category and cuisine tags
+    tags = []
+    try:
+        category = scraper.category()
+        if category:
+            if isinstance(category, list):
+                tags.extend(category)
+            else:
+                tags.extend([t.strip() for t in category.split(',') if t.strip()])
+    except Exception:
+        pass
+
+    try:
+        cuisine = scraper.cuisine()
+        if cuisine:
+            if isinstance(cuisine, list):
+                tags.extend(cuisine)
+            else:
+                tags.extend([t.strip() for t in cuisine.split(',') if t.strip()])
+    except Exception:
+        pass
+
+    cleaned_tags = []
+    seen = set()
+    for t in tags:
+        clean_t = t.lower().strip()
+        if clean_t and len(clean_t) < 30 and clean_t not in seen:
+            seen.add(clean_t)
+            cleaned_tags.append(clean_t)
+
     # 5. Map recipe fields to schema
     recipe_data = {
         "title": title,
@@ -195,7 +225,8 @@ def main():
         "link": url,
         "ingredients": parsed_ingredients,
         "instructions": instructions,
-        "notes": []
+        "notes": [],
+        "tags": cleaned_tags
     }
     
     # 6. Parse and add optional fields if available
@@ -238,7 +269,8 @@ def main():
     recipes.append({
         "id": new_id,
         "title": title,
-        "image": saved_image_path
+        "image": saved_image_path,
+        "tags": cleaned_tags
     })
     
     # Sort recipes by id

@@ -13,6 +13,16 @@
     .meta { color: #555; margin-bottom: 1em; }
     .notes { background: #f9f9f9; border-left: 4px solid #2980b9; padding: 1em; margin-top: 2em; }
     .source { margin-top: 1em; font-size: 0.95em; word-break: break-all; }
+    .tag-badge {
+      background: #e8f4fd;
+      color: #2980b9;
+      font-size: 0.85rem;
+      padding: 0.3em 0.7em;
+      border-radius: 12px;
+      text-transform: capitalize;
+      font-weight: 500;
+      display: inline-block;
+    }
     @media (max-width: 600px) {
       body { margin: 1em; }
       h1 { font-size: 1.3em; }
@@ -24,6 +34,7 @@
 <body>
   <a href="index.html">&larr; Back to all recipes</a>
   <h1 id="recipe-title"></h1>
+  <div id="recipe-tags" style="display: flex; gap: 0.4em; flex-wrap: wrap; margin-bottom: 1em;"></div>
   <div class="meta" id="recipe-serves"></div>
   <img id="recipe-image" style="display:none;" />
   <div id="recipe-link"></div>
@@ -46,9 +57,14 @@
         })
         .then(recipe => {
           document.getElementById('recipe-title').textContent = recipe.title;
+          if (Array.isArray(recipe.tags) && recipe.tags.length > 0) {
+            const tagsDiv = document.getElementById('recipe-tags');
+            tagsDiv.innerHTML = recipe.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
+          }
           if (recipe.serves) {
             document.getElementById('recipe-serves').textContent = `Serves: ${recipe.serves}`;
           }
+
           if (recipe.image) {
             const img = document.getElementById('recipe-image');
             img.src = recipe.image;

@@ -108,6 +108,48 @@
     #clear-selected:hover {
       background: #c0392b;
     }
+    .tag-filters {
+      display: flex;
+      gap: 0.5em;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5em;
+    }
+    .tag-pill {
+      padding: 0.4em 1em;
+      font-size: 0.9em;
+      border-radius: 20px;
+      background: #f0f0f0;
+      color: #333;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: capitalize;
+    }
+    .tag-pill:hover {
+      background: #e5e5e5;
+    }
+    .tag-pill.active {
+      background: #2980b9;
+      color: #fff;
+      border-color: #2980b9;
+    }
+    .card-tags {
+      display: flex;
+      gap: 0.3em;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0.5em 0;
+    }
+    .card-tag {
+      background: #e8f4fd;
+      color: #2980b9;
+      font-size: 0.75rem;
+      padding: 0.25em 0.6em;
+      border-radius: 12px;
+      text-transform: capitalize;
+      font-weight: 500;
+    }
     @media (max-width: 600px) {
       body { margin: 1em; }
       .grid { gap: 1em; }
@@ -122,10 +164,13 @@
 </head>
 <body>
   <h1>Recipes</h1>
-  <div style="display: flex; gap: 1em; align-items: center; justify-content: center; margin-bottom: 2em;">
+  <div style="display: flex; gap: 1em; align-items: center; justify-content: center; margin-bottom: 1em;">
     <input type="text" id="filter" class="filter-box" placeholder="Filter recipes by title..." style="margin-bottom:0;">
     <button id="clear-search" style="height:2.5em; font-size:1em; padding:0 1.2em; background:#e67e22; color:#fff; border:none; border-radius:6px; cursor:pointer;">Clear Search</button>
   </div>
+
+  <div id="tag-filters" class="tag-filters"></div>
+
   <div id="top-actions" style="display: flex; gap: 1em; align-items: center; justify-content: center; margin-bottom: 2em;">
     <button id="show-ingredients-top" class="show top">List Selected Ingredients</button>
     <button id="clear-selected">Clear Selected</button>
@@ -135,6 +180,7 @@
   <script>
     let allRecipes = [];
     let selectedIds = new Set();
+    let activeTag = 'all';
 
     function updateClearButton() {
       const btn = document.getElementById('clear-selected');
@@ -164,9 +210,17 @@
         let img = recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : '';
         let link = `<a class="card-title" href="recipe.html?id=${recipe.id}">${recipe.title}</a>`;
         let external = recipe.link ? `<a class="external-link" href="${recipe.link}" target="_blank" title="External link">[source]</a>` : '';
+        
+        let tagsHtml = '';
+        if (Array.isArray(recipe.tags) && recipe.tags.length > 0) {
+          tagsHtml = `<div class="card-tags">` + 
+            recipe.tags.map(t => `<span class="card-tag">${t}</span>`).join('') +
+            `</div>`;
+        }
+
         let checked = selectedIds.has(String(recipe.id)) ? 'checked' : '';
         let checkbox = `<input type="checkbox" class="select-recipe" data-id="${recipe.id}" ${checked}>`;
-        li.innerHTML = checkbox + img + link + external;
+        li.innerHTML = checkbox + img + link + tagsHtml + external;
         list.appendChild(li);
       });
 
@@ -178,25 +232,62 @@
       updateClearButton();
     }
 
+    function renderTagFilters() {
+      const tagFiltersContainer = document.getElementById('tag-filters');
+      if (!tagFiltersContainer) return;
+
+      const allTagsSet = new Set();
+      allRecipes.forEach(recipe => {
+        if (Array.isArray(recipe.tags)) {
+          recipe.tags.forEach(t => {
+            if (t.trim()) allTagsSet.add(t.trim().toLowerCase());
+          });
+        }
+      });
+
+      const standardTags = ['breakfast', 'lunch', 'dinner', 'snack'];
+      const extraTags = Array.from(allTagsSet).filter(t => !standardTags.includes(t)).sort();
+      const tagsList = ['all', ...standardTags.filter(t => allTagsSet.has(t)), ...extraTags];
+
+      tagFiltersContainer.innerHTML = '';
+      tagsList.forEach(tag => {
+        const button = document.createElement('button');
+        button.className = 'tag-pill' + (activeTag === tag ? ' active' : '');
+        button.textContent = tag === 'all' ? 'All' : tag;
+        button.addEventListener('click', () => {
+          activeTag = tag;
+          document.querySelectorAll('.tag-pill').forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          filterAndRender();
+        });
+        tagFiltersContainer.appendChild(button);
+      });
+    }
+
+    function filterAndRender() {
+      const value = document.getElementById('filter').value.trim().toLowerCase();
+      const filtered = allRecipes.filter(recipe => {
+        const matchesQuery = recipe.title.toLowerCase().includes(value);
+        const matchesTag = activeTag === 'all' || 
+          (Array.isArray(recipe.tags) && recipe.tags.some(t => t.toLowerCase() === activeTag));
+        return matchesQuery && matchesTag;
+      });
+      renderRecipes(filtered);
+    }
+
     fetch('recipes.json')
       .then(res => res.json())
       .then(recipes => {
         allRecipes = recipes;
-        renderRecipes(allRecipes);
+        renderTagFilters();
+        filterAndRender();
       });
 
-    document.getElementById('filter').addEventListener('input', function() {
-      const value = this.value.trim().toLowerCase();
-      renderRecipes(
-        allRecipes.filter(recipe =>
-          recipe.title.toLowerCase().includes(value)
-        )
-      );
-    });
+    document.getElementById('filter').addEventListener('input', filterAndRender);
 
     document.getElementById('clear-search').addEventListener('click', function() {
       document.getElementById('filter').value = '';
-      renderRecipes(allRecipes);
+      filterAndRender();
     });
 
     function handleShowIngredients() {
@@ -213,7 +304,7 @@
 
     document.getElementById('clear-selected').addEventListener('click', function() {
       selectedIds.clear();
-      renderRecipes(allRecipes);
+      filterAndRender();
     });
   </script>
 </body>

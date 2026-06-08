@@ -130,5 +130,9 @@
     "vitamin_c": "46mg",
     "calcium": "44mg",
     "iron": "1mg"
-  }
+  },
+  "tags": [
+    "lunch",
+    "dinner"
+  ]
 }

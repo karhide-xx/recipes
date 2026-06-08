@@ -2,86 +2,170 @@
   {
     "id": 1,
     "title": "Carrot, Chickpea, and Feta Salad",
-    "image": "images/1.webp"
+    "image": "images/1.webp",
+    "tags": [
+      "lunch",
+      "dinner",
+      "salad"
+    ]
   },
   {
     "id": 2,
     "title": "Cheesy Black Bean Quesadillas",
-    "image": "images/2.webp"
+    "image": "images/2.webp",
+    "tags": [
+      "lunch",
+      "dinner",
+      "snack"
+    ]
   },
   {
     "id": 3,
     "title": "Mexican Corn Salad",
-    "image": "images/3.jpg"
+    "image": "images/3.jpg",
+    "tags": [
+      "lunch",
+      "dinner",
+      "salad"
+    ]
   },
   {
     "id": 4,
     "title": "Sausage & Baked Bean Casserole",
-    "image": "images/4.jpg"
+    "image": "images/4.jpg",
+    "tags": [
+      "dinner"
+    ]
   },
   {
     "id": 5,
     "title": "Roasted Cauliflower & Chickpea Coconut Curry",
-    "image": "images/5.webp"
+    "image": "images/5.webp",
+    "tags": [
+      "dinner",
+      "curry"
+    ]
   },
   {
     "id": 6,
     "title": "Roasted Carrot & Whipped Feta Tart",
-    "image": "images/6.webp"
+    "image": "images/6.webp",
+    "tags": [
+      "lunch",
+      "dinner"
+    ]
   },
   {
     "id": 7,
     "title": "Peperonata Coddled Eggs",
-    "image": "images/7.webp"
+    "image": "images/7.webp",
+    "tags": [
+      "breakfast",
+      "lunch"
+    ]
   },
   {
     "id": 8,
     "title": "Saag Paneer Pilau",
-    "image": "images/8.jpg"
+    "image": "images/8.jpg",
+    "tags": [
+      "dinner"
+    ]
   },
   {
     "id": 9,
     "title": "Indian Cabbage Recipe (Oven Roasted)",
-    "image": "images/9.jpg"
+    "image": "images/9.jpg",
+    "tags": [
+      "lunch",
+      "dinner"
+    ]
   },
   {
     "id": 10,
     "title": "Honey Roasted Chickpea and Avocado Salad",
-    "image": "images/10.jpg"
+    "image": "images/10.jpg",
+    "tags": [
+      "lunch",
+      "dinner",
+      "salad"
+    ]
   },
   {
     "id": 11,
     "title": "Carrot Biryani",
-    "image": "images/11.webp"
+    "image": "images/11.webp",
+    "tags": [
+      "dinner"
+    ]
   },
   {
     "id": 12,
     "title": "Red Lentil Dahl",
-    "image": "images/12.jpg"
+    "image": "images/12.jpg",
+    "tags": [
+      "dinner",
+      "curry"
+    ]
   },
   {
     "id": 13,
     "title": "Turkish Bread",
-    "image": "images/13.avif"
+    "image": "images/13.avif",
+    "tags": [
+      "snack",
+      "bread"
+    ]
   },
   {
     "id": 14,
     "title": "Elote Grilled Mexican Corn Salad",
-    "image": "images/14.webp"
+    "image": "images/14.webp",
+    "tags": [
+      "lunch",
+      "dinner",
+      "salad"
+    ]
   },
   {
     "id": 15,
     "title": "Fluffy American pancakes",
-    "image": "images/15.jpg"
+    "image": "images/15.jpg",
+    "tags": [
+      "breakfast"
+    ]
   },
   {
     "id": 16,
     "title": "Spiced carrot & lentil soup",
-    "image": "images/16.jpg"
+    "image": "images/16.jpg",
+    "tags": [
+      "lunch",
+      "dinner",
+      "soup"
+    ]
   },
   {
     "id": 17,
     "title": "Spiced carrot & lentil soup",
-    "image": "images/17.jpg"
+    "image": "images/17.jpg",
+    "tags": [
+      "lunch",
+      "dinner",
+      "soup"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Easy classic lasagne",
+    "image": "images/18.jpg",
+    "tags": [
+      "dinner",
+      "lunch",
+      "main course",
+      "pasta",
+      "supper",
+      "italian"
+    ]
   }
 ]

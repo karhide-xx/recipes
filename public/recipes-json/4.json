@@ -35,7 +35,6 @@
       "amount": "1",
       "unit": "tbsp",
       "ingredient": "t",
-      "ingredient": "t",
       "note": ""
     },
     {
@@ -100,5 +99,8 @@
     "fiber": "6g",
     "sugar": "15g",
     "protein": "23g"
-  }
+  },
+  "tags": [
+    "dinner"
+  ]
 }

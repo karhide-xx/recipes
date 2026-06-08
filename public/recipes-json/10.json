@@ -159,5 +159,10 @@
     "sodium": "980mg",
     "fiber": "9g",
     "sugar": "9g"
-  }
+  },
+  "tags": [
+    "lunch",
+    "dinner",
+    "salad"
+  ]
 }

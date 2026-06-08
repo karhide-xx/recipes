@@ -762,6 +762,32 @@
             </div>
           </div>
 
+          <!-- Tags Section -->
+          <div class="form-card">
+            <div class="form-card-title">Tags</div>
+            <div class="form-group">
+              <label>Standard Tags</label>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.25rem;">
+                <label style="display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; text-transform: none; color: var(--text-primary); font-size: 0.95rem;">
+                  <input type="checkbox" name="recipe-tag" value="Breakfast" style="width: auto; margin: 0;"> Breakfast
+                </label>
+                <label style="display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; text-transform: none; color: var(--text-primary); font-size: 0.95rem;">
+                  <input type="checkbox" name="recipe-tag" value="Lunch" style="width: auto; margin: 0;"> Lunch
+                </label>
+                <label style="display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; text-transform: none; color: var(--text-primary); font-size: 0.95rem;">
+                  <input type="checkbox" name="recipe-tag" value="Dinner" style="width: auto; margin: 0;"> Dinner
+                </label>
+                <label style="display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; text-transform: none; color: var(--text-primary); font-size: 0.95rem;">
+                  <input type="checkbox" name="recipe-tag" value="Snack" style="width: auto; margin: 0;"> Snack
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="recipe-custom-tags-input">Other Tags (comma separated)</label>
+              <input type="text" id="recipe-custom-tags-input" placeholder="e.g. dessert, soup, salad, vegetarian">
+            </div>
+          </div>
+
           <!-- Image Selection & Auto Upload -->
           <div class="form-card">
             <div class="form-card-title">Recipe Image</div>
@@ -1165,6 +1191,24 @@
       document.getElementById('recipe-source-input').value = activeRecipe.source || '';
       document.getElementById('recipe-link-input').value = activeRecipe.link || '';
       document.getElementById('recipe-image-input').value = activeRecipe.image || '';
+
+      // Populate Tags
+      const cbs = document.querySelectorAll('input[name="recipe-tag"]');
+      cbs.forEach(cb => cb.checked = false);
+      
+      let customTags = [];
+      if (Array.isArray(activeRecipe.tags)) {
+        activeRecipe.tags.forEach(tag => {
+          const lowerTag = tag.trim().toLowerCase();
+          const foundCb = Array.from(cbs).find(cb => cb.value.toLowerCase() === lowerTag);
+          if (foundCb) {
+            foundCb.checked = true;
+          } else {
+            customTags.push(tag.trim());
+          }
+        });
+      }
+      document.getElementById('recipe-custom-tags-input').value = customTags.join(', ');
 
       // Image Preview
       updateImagePreview(activeRecipe.image);
@@ -1706,6 +1750,26 @@
       });
       serializeIngredientsBack(sections);
 
+      // Save Tags
+      const selectedTags = [];
+      document.querySelectorAll('input[name="recipe-tag"]:checked').forEach(cb => {
+        selectedTags.push(cb.value.toLowerCase());
+      });
+      const customTagsVal = document.getElementById('recipe-custom-tags-input').value.trim();
+      if (customTagsVal) {
+        customTagsVal.split(',').forEach(t => {
+          const cleanT = t.trim().toLowerCase();
+          if (cleanT && !selectedTags.includes(cleanT)) {
+            selectedTags.push(cleanT);
+          }
+        });
+      }
+      if (selectedTags.length > 0) {
+        activeRecipe.tags = selectedTags;
+      } else {
+        delete activeRecipe.tags;
+      }
+
       try {
         // 1. Copy image file if pending
         if (pendingImageFile) {
@@ -1731,7 +1795,8 @@
         const indexEntry = {
           id: activeRecipeId,
           title: activeRecipe.title,
-          image: activeRecipe.image || ''
+          image: activeRecipe.image || '',
+          tags: activeRecipe.tags || []
         };
 
         if (indexEntryIdx >= 0) {
