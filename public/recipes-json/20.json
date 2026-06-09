@@ -1,0 +1,63 @@
+{
+  "title": "Charred Watermelon, Feta & Mint Salad",
+  "serves": "4-6",
+  "image": "images/20.jpg",
+  "ingredients": [
+    {
+      "amount": "6",
+      "unit": "tbsp",
+      "ingredient": "olive oil"
+    },
+    {
+      "amount": "3",
+      "unit": "tbsp",
+      "ingredient": "red wine vinegar"
+    },
+    {
+      "amount": "2",
+      "unit": "",
+      "ingredient": "shallots",
+      "note": "finely sliced into rings"
+    },
+    {
+      "amount": "1",
+      "unit": "",
+      "ingredient": "watermelon (approx. 1.8kg)",
+      "note": "rind kept on, sliced into 3-4cm wedges"
+    },
+    {
+      "amount": "200",
+      "unit": "g",
+      "ingredient": "feta cheese",
+      "note": "crumbled"
+    },
+    {
+      "amount": "25",
+      "unit": "g",
+      "ingredient": "mint leaves",
+      "note": "picked"
+    },
+    {
+      "amount": "2",
+      "unit": "tsp",
+      "ingredient": "black sesame seeds"
+    },
+    {
+      "amount": "50",
+      "unit": "g",
+      "ingredient": "salted roasted peanuts",
+      "note": "roughly chopped"
+    }
+  ],
+  "instructions": [
+    "Combine 3 tbsp of the oil and the vinegar in a non-metallic bowl. Season. Stir in the shallots and set aside to pickle lightly. Will keep chilled for a few hours.",
+    "Heat a griddle pan over a high heat. Brush the rest of the oil all over the melon wedges and, once the pan is very hot, cook for 1-2 mins on each side until charred and juicy. Remove the rinds and slice the wedges into neat triangles, then arrange on a serving platter. Crumble over the feta and top with the mint, pickled shallots, any melon juices from the pan, the sesame seeds and peanuts."
+  ],
+  "notes": [
+    "Nutrition (per serving, based on 6 servings): 346 kcals | Fat: 23g (Saturates: 7g) | Carbs: 23g (Sugars: 20g) | Fibre: 2g",
+    "Good to know: vit c, 2 of 5-a-day. Easy, Vegetarian (V)."
+  ],
+  "tags": [
+    "salad"
+  ]
+}

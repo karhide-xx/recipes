@@ -1,0 +1,98 @@
+{
+  "title": "Zesty Corn, Lime & Feta Tossed Salad",
+  "serves": "4-6",
+  "image": "images/19.jpg",
+  "ingredients": {
+    "salad": [
+      {
+        "amount": "200",
+        "unit": "g",
+        "ingredient": "cherry tomatoes",
+        "note": "halved"
+      },
+      {
+        "amount": "1",
+        "unit": "",
+        "ingredient": "red pepper",
+        "note": "finely diced"
+      },
+      {
+        "amount": "1",
+        "unit": "",
+        "ingredient": "red onion",
+        "note": "finely diced"
+      },
+      {
+        "amount": "4",
+        "unit": "",
+        "ingredient": "corn cobs",
+        "note": "any husks removed"
+      },
+      {
+        "amount": "150",
+        "unit": "g",
+        "ingredient": "feta cheese",
+        "note": "crumbled"
+      },
+      {
+        "amount": "small handful",
+        "unit": "",
+        "ingredient": "fresh coriander",
+        "note": "roughly chopped"
+      },
+      {
+        "amount": "small handful",
+        "unit": "",
+        "ingredient": "fresh mint leaves",
+        "note": "picked and torn"
+      },
+      {
+        "amount": "1-2 handfuls",
+        "unit": "",
+        "ingredient": "tortilla chips"
+      }
+    ],
+    "dressing": [
+      {
+        "amount": "2",
+        "unit": "",
+        "ingredient": "limes",
+        "note": "zested and juiced"
+      },
+      {
+        "amount": "3",
+        "unit": "tbsp",
+        "ingredient": "extra virgin olive oil"
+      },
+      {
+        "amount": "1",
+        "unit": "tsp",
+        "ingredient": "honey"
+      },
+      {
+        "amount": "½",
+        "unit": "tsp",
+        "ingredient": "smoked paprika"
+      },
+      {
+        "amount": "½",
+        "unit": "tsp",
+        "ingredient": "chilli flakes or Tajín",
+        "note": "optional"
+      }
+    ]
+  },
+  "instructions": [
+    "Combine the tomatoes, peppers and onions in a large bowl. For the dressing, whisk all the ingredients together in a separate bowl (or shake together in a sealed jam jar) along with some seasoning. The veg mixture and dressing will keep chilled overnight.",
+    "Grill the corn cobs over a hot barbecue or in a griddle pan over a high heat, turning occasionally until lightly charred all over - the kernels should be tender with smoky, caramelised spots. Cool slightly, then slice the kernels off the cobs using a sharp knife - working one at a time, hold the cob upright on a sturdy chopping board, and slice the kernels off down the length of the cob.",
+    "Fold the warm sweetcorn through the veg mixture along with the feta, coriander, mint and the dressing.",
+    "Pile onto a serving platter, then roughly crush the tortilla chips and scatter over - do this just before serving so they don't soften too much."
+  ],
+  "notes": [
+    "Nutrition (per serving, based on 6 servings): 225 kcals | Fat: 14g (Saturates: 5g) | Carbs: 16g (Sugars: 7g) | Fibre: 4g | Protein: 8g | Salt: 0.71g",
+    "Good to know: folate, vit c, 2 of 5-a-day. Easy, Vegetarian (V)."
+  ],
+  "tags": [
+    "salad"
+  ]
+}
