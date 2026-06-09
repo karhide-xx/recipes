@@ -2,53 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Recipe</title>
+  <title>Recipe Details</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: sans-serif; margin: 2em; }
-    a { color: #2980b9; }
-    h1 { color: #2c3e50; }
-    ul { margin-bottom: 2em; }
-    img { max-width: 100%; display: block; margin-bottom: 1em; border-radius: 4px; }
-    .meta { color: #555; margin-bottom: 1em; }
-    .notes { background: #f9f9f9; border-left: 4px solid #2980b9; padding: 1em; margin-top: 2em; }
-    .source { margin-top: 1em; font-size: 0.95em; word-break: break-all; }
-    .tag-badge {
-      background: #e8f4fd;
-      color: #2980b9;
-      font-size: 0.85rem;
-      padding: 0.3em 0.7em;
-      border-radius: 12px;
-      text-transform: capitalize;
-      font-weight: 500;
-      display: inline-block;
-    }
-    @media (max-width: 600px) {
-      body { margin: 1em; }
-      h1 { font-size: 1.3em; }
-      .notes { font-size: 0.95em; }
-      ul, ol { font-size: 0.98em; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a href="index.html">&larr; Back to all recipes</a>
-  <h1 id="recipe-title"></h1>
-  <div id="recipe-tags" style="display: flex; gap: 0.4em; flex-wrap: wrap; margin-bottom: 1em;"></div>
-  <div class="meta" id="recipe-serves"></div>
-  <img id="recipe-image" style="display:none;" />
-  <div id="recipe-link"></div>
-  <div class="source" id="recipe-source"></div>
-  <h2>Ingredients</h2>
-  <div id="ingredients"></div>
-  <h2>Instructions</h2>
-  <ol id="instructions"></ol>
-  <div class="notes" id="recipe-notes" style="display:none;"></div>
+  <div class="container">
+    <a href="index.html" class="back-link">&larr; Back to all recipes</a>
+    
+    <article class="recipe-detail">
+      <div class="recipe-header">
+        <h1 id="recipe-title">Loading Recipe...</h1>
+        <div class="recipe-meta-badges">
+          <div id="recipe-tags" style="display: flex; gap: 0.4em; flex-wrap: wrap;"></div>
+          <span class="meta-badge" id="recipe-serves" style="display:none;"></span>
+        </div>
+      </div>
+
+      <div class="recipe-grid">
+        <div class="recipe-media">
+          <img id="recipe-image" style="display:none;" />
+          <div class="recipe-meta-section">
+            <div id="recipe-link"></div>
+            <div id="recipe-source"></div>
+          </div>
+        </div>
+        
+        <div class="recipe-content">
+          <h2>Ingredients</h2>
+          <div id="ingredients"></div>
+          
+          <h2>Instructions</h2>
+          <ol id="instructions" class="instructions-list"></ol>
+          
+          <div class="notes-box" id="recipe-notes" style="display:none;"></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     if (!id) {
-      document.body.innerHTML = '<p>No recipe specified. <a href="index.html">Back to home</a></p>';
+      document.querySelector('.recipe-detail').innerHTML = '<p style="text-align:center; padding: 2rem;">No recipe specified. <a href="index.html">Back to home</a></p>';
     } else {
       fetch('recipes-json/' + id + '.json')
         .then(res => {
@@ -57,12 +54,16 @@
         })
         .then(recipe => {
           document.getElementById('recipe-title').textContent = recipe.title;
+          document.title = recipe.title + " - Recipe Details";
+          
           if (Array.isArray(recipe.tags) && recipe.tags.length > 0) {
             const tagsDiv = document.getElementById('recipe-tags');
             tagsDiv.innerHTML = recipe.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
           }
           if (recipe.serves) {
-            document.getElementById('recipe-serves').textContent = `Serves: ${recipe.serves}`;
+            const servesBadge = document.getElementById('recipe-serves');
+            servesBadge.textContent = `Serves: ${recipe.serves}`;
+            servesBadge.style.display = 'inline-block';
           }
 
           if (recipe.image) {
@@ -73,56 +74,71 @@
           }
           if (recipe.link) {
             document.getElementById('recipe-link').innerHTML =
-              `<a href="${recipe.link}" target="_blank">More about this recipe</a>`;
+              `<a href="${recipe.link}" target="_blank" class="btn btn-secondary" style="width:100%; margin-bottom:0.5rem; text-align:center;">🔗 View Original Web Page</a>`;
           }
           if (recipe.source) {
             document.getElementById('recipe-source').innerHTML =
-              `<a href="${recipe.source}" target="_blank">Source</a>`;
+              `<a href="${recipe.source}" target="_blank" class="btn btn-outline" style="width:100%; text-align:center;">📖 Source Website</a>`;
           }
 
-          // Handle ingredients: array or object (new format)
+          // Handle ingredients: render as an interactive checklist
           const ingredientsDiv = document.getElementById('ingredients');
           ingredientsDiv.innerHTML = '';
+          
           function renderIngredient(i) {
             let str = '';
             if (i.amount) str += `<span class="ingredient-amount">${i.amount}</span> `;
             if (i.unit) str += `<span class="ingredient-unit">${i.unit}</span> `;
             str += i.ingredient;
-            // Optionally add note: if (i.note) str += ` <span class="ingredient-note">(${i.note})</span>`;
-            return `<li>${str.trim()}</li>`;
+            
+            return `
+              <label class="checklist-item">
+                <input type="checkbox" onchange="this.parentElement.classList.toggle('checked', this.checked)">
+                <span>${str.trim()}</span>
+              </label>`;
           }
+          
           if (Array.isArray(recipe.ingredients)) {
-            // Flat array of ingredient objects
-            const ul = document.createElement('ul');
-            ul.innerHTML = recipe.ingredients.map(renderIngredient).join('');
-            ingredientsDiv.appendChild(ul);
+            const div = document.createElement('div');
+            div.style.display = 'flex';
+            div.style.flexDirection = 'column';
+            div.innerHTML = recipe.ingredients.map(renderIngredient).join('');
+            ingredientsDiv.appendChild(div);
           } else if (typeof recipe.ingredients === 'object' && recipe.ingredients !== null) {
-            // Object with sections
             for (const [section, items] of Object.entries(recipe.ingredients)) {
               const sectionTitle = section.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
               const h3 = document.createElement('h3');
               h3.textContent = sectionTitle;
               ingredientsDiv.appendChild(h3);
-              const ul = document.createElement('ul');
-              ul.innerHTML = items.map(renderIngredient).join('');
-              ingredientsDiv.appendChild(ul);
+              const div = document.createElement('div');
+              div.style.display = 'flex';
+              div.style.flexDirection = 'column';
+              div.innerHTML = items.map(renderIngredient).join('');
+              ingredientsDiv.appendChild(div);
             }
           }
 
+          // Render interactive instructions
           document.getElementById('instructions').innerHTML =
-            recipe.instructions.map(i => `<li>${i}</li>`).join('');
+            recipe.instructions.map((step, idx) => `
+              <li class="instruction-step" onclick="this.classList.toggle('active')">
+                <div class="instruction-step-num">${idx + 1}</div>
+                <div class="instruction-step-text">${step}</div>
+              </li>`).join('');
+
           if (recipe.notes) {
             const notesDiv = document.getElementById('recipe-notes');
             if (Array.isArray(recipe.notes)) {
-              notesDiv.innerHTML = recipe.notes.map(n => `<div>${n}</div>`).join('');
+              notesDiv.innerHTML = '<h3>Chef\'s Notes</h3>' + recipe.notes.map(n => `<div>${n}</div>`).join('');
             } else {
-              notesDiv.textContent = recipe.notes;
+              notesDiv.innerHTML = '<h3>Chef\'s Notes</h3>' + `<div>${recipe.notes}</div>`;
             }
             notesDiv.style.display = 'block';
           }
         })
-        .catch(() => {
-          document.body.innerHTML = '<p>Recipe not found. <a href="index.html">Back to home</a></p>';
+        .catch((err) => {
+          console.error(err);
+          document.querySelector('.recipe-detail').innerHTML = '<p style="text-align:center; padding: 2rem;">Recipe not found. <a href="index.html">Back to home</a></p>';
         });
     }
   </script>

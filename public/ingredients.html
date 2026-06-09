@@ -2,31 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Combined Ingredients</title>
+  <title>Combined Grocery List</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: sans-serif; margin: 2em; }
-    h1 { color: #2c3e50; }
-    ul { margin-bottom: 2em; }
-    .ingredient-amount { font-weight: bold; margin-right: 0.2em; }
-    .ingredient-item { margin-bottom: 0.3em; }
-    @media (max-width: 600px) {
-      body { margin: 1em; }
-      h1 { font-size: 1.3em; }
-      ul { font-size: 0.98em; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Combined Ingredients</h1>
-  <div id="ingredients-list"></div>
-  <a href="index.html">&larr; Back to recipes</a>
+  <div class="container">
+    <a href="index.html" class="back-link">&larr; Back to recipes</a>
+
+    <div class="combined-list">
+      <header class="recipe-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <h1>Combined Grocery List</h1>
+        <p style="color: var(--text-secondary);">We've combined the ingredients from your selected recipes. You can check off items as you shop, copy the list to your notes, or print it out.</p>
+      </header>
+
+      <div id="ingredients-list"></div>
+
+      <div class="ingredients-actions">
+        <button id="copy-clipboard" class="btn btn-primary">📋 Copy list to notes</button>
+        <button onclick="window.print()" class="btn btn-secondary">🖨️ Print List</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Get selected IDs from query string
     const params = new URLSearchParams(window.location.search);
     const ids = params.get('ids') ? params.get('ids').split(',') : [];
+    
     if (ids.length === 0) {
-      document.getElementById('ingredients-list').innerHTML = '<p>No recipes selected.</p>';
+      document.getElementById('ingredients-list').innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--text-secondary);">No recipes selected. <a href="index.html">Back to home</a></p>';
+      document.querySelector('.ingredients-actions').style.display = 'none';
     } else {
       Promise.all(ids.map(id => fetch('recipes-json/' + id + '.json').then(r => r.json())))
         .then(recipes => {
@@ -48,23 +54,55 @@
             });
           });
 
-          // Render grouped list (amounts in brackets)
+          // Render grouped list with structured items
           const container = document.getElementById('ingredients-list');
-          const ul = document.createElement('ul');
-          ul.innerHTML = Object.values(ingredientMap).map(obj => {
+          
+          let html = Object.values(ingredientMap).map(obj => {
             const details = obj.entries.map(e => {
               let str = '';
               if (e.amount || e.unit) {
-                str += '(';
-                if (e.amount) str += `<span class="ingredient-amount">${e.amount}</span>`;
-                if (e.unit) str += ` <span class="ingredient-unit">${e.unit}</span>`;
-                str = str.trim() + ')';
+                if (e.amount) str += `${e.amount}`;
+                if (e.unit) str += ` ${e.unit}`;
               }
-              return str;
-            }).join(' + ');
-            return `<li class="ingredient-item">${obj.ingredient} ${details}</li>`;
+              return str.trim();
+            }).filter(Boolean).join(' + ');
+
+            const amountHtml = details ? `<span class="ingredient-item-amount">${details}</span>` : '';
+            
+            return `
+              <div class="ingredient-item-row">
+                <label class="checklist-item" style="margin-bottom:0;">
+                  <input type="checkbox" onchange="this.parentElement.classList.toggle('checked', this.checked)">
+                  <span class="ingredient-item-name">${obj.ingredient}</span>
+                </label>
+                ${amountHtml}
+              </div>`;
           }).join('');
-          container.appendChild(ul);
+          
+          container.innerHTML = html;
+
+          // Enable Clipboard copy functionality
+          document.getElementById('copy-clipboard').addEventListener('click', () => {
+            const lines = Object.values(ingredientMap).map(obj => {
+              const details = obj.entries.map(e => {
+                let str = '';
+                if (e.amount) str += `${e.amount} `;
+                if (e.unit) str += `${e.unit} `;
+                return str.trim();
+              }).filter(Boolean).join(' + ');
+              return `- [ ] ${obj.ingredient}` + (details ? ` (${details})` : '');
+            }).join('\n');
+
+            navigator.clipboard.writeText(lines).then(() => {
+              const btn = document.getElementById('copy-clipboard');
+              const originalText = btn.textContent;
+              btn.textContent = '✅ Copied to clipboard!';
+              setTimeout(() => btn.textContent = originalText, 2000);
+            }).catch(err => {
+              console.error('Failed to copy: ', err);
+              alert('Could not copy to clipboard. Please copy manually.');
+            });
+          });
         });
     }
   </script>
