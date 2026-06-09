@@ -180,7 +180,7 @@
   <script>
     let allRecipes = [];
     let selectedIds = new Set();
-    let activeTag = 'all';
+    let activeTags = new Set();
 
     function updateClearButton() {
       const btn = document.getElementById('clear-selected');
@@ -252,12 +252,20 @@
       tagFiltersContainer.innerHTML = '';
       tagsList.forEach(tag => {
         const button = document.createElement('button');
-        button.className = 'tag-pill' + (activeTag === tag ? ' active' : '');
+        const isActive = (tag === 'all' && activeTags.size === 0) || (tag !== 'all' && activeTags.has(tag));
+        button.className = 'tag-pill' + (isActive ? ' active' : '');
         button.textContent = tag === 'all' ? 'All' : tag;
         button.addEventListener('click', () => {
-          activeTag = tag;
-          document.querySelectorAll('.tag-pill').forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
+          if (tag === 'all') {
+            activeTags.clear();
+          } else {
+            if (activeTags.has(tag)) {
+              activeTags.delete(tag);
+            } else {
+              activeTags.add(tag);
+            }
+          }
+          renderTagFilters();
           filterAndRender();
         });
         tagFiltersContainer.appendChild(button);
@@ -268,8 +276,8 @@
       const value = document.getElementById('filter').value.trim().toLowerCase();
       const filtered = allRecipes.filter(recipe => {
         const matchesQuery = recipe.title.toLowerCase().includes(value);
-        const matchesTag = activeTag === 'all' || 
-          (Array.isArray(recipe.tags) && recipe.tags.some(t => t.toLowerCase() === activeTag));
+        const matchesTag = activeTags.size === 0 || 
+          (Array.isArray(recipe.tags) && [...activeTags].every(t => recipe.tags.some(rt => rt.toLowerCase() === t)));
         return matchesQuery && matchesTag;
       });
       renderRecipes(filtered);
