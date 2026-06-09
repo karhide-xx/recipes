@@ -277,7 +277,7 @@
       const filtered = allRecipes.filter(recipe => {
         const matchesQuery = recipe.title.toLowerCase().includes(value);
         const matchesTag = activeTags.size === 0 || 
-          (Array.isArray(recipe.tags) && [...activeTags].every(t => recipe.tags.some(rt => rt.toLowerCase() === t)));
+          (Array.isArray(recipe.tags) && [...activeTags].some(t => recipe.tags.some(rt => rt.toLowerCase() === t)));
         return matchesQuery && matchesTag;
       });
       renderRecipes(filtered);
