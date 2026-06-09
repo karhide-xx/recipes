@@ -1,0 +1,92 @@
+{
+  "title": "Tomato and Carrot Soup with Red Lentil Polpette",
+  "serves": 4,
+  "image": "images/17.jpg",
+  "ingredients": {
+    "soup": [
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "extra virgin olive oil"
+      },
+      {
+        "amount": "1",
+        "unit": "",
+        "ingredient": "onion",
+        "note": "finely diced"
+      },
+      {
+        "amount": "2",
+        "unit": "cloves",
+        "ingredient": "garlic",
+        "note": "crushed"
+      },
+      {
+        "amount": "4",
+        "unit": "large",
+        "ingredient": "carrots",
+        "note": "finely diced"
+      },
+      {
+        "amount": "400",
+        "unit": "g",
+        "ingredient": "fresh vine tomatoes",
+        "note": "roughly chopped, or 1 x 400g tin of chopped tomatoes"
+      },
+      {
+        "amount": "50",
+        "unit": "g",
+        "ingredient": "dried red lentils"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "tomato purée"
+      },
+      {
+        "amount": "400",
+        "unit": "ml",
+        "ingredient": "vegetable stock"
+      },
+      {
+        "amount": "½",
+        "unit": "tsp",
+        "ingredient": "cayenne pepper"
+      },
+      {
+        "amount": "",
+        "unit": "",
+        "ingredient": "sea salt and freshly ground black pepper"
+      }
+    ],
+    "to_serve": [
+      {
+        "amount": "3 per bowl",
+        "unit": "",
+        "ingredient": "warm Red Lentil Polpette (page 176)"
+      },
+      {
+        "amount": "",
+        "unit": "swirl",
+        "ingredient": "Green Pesto (page 205) (or vegetarian pesto)"
+      }
+    ]
+  },
+  "instructions": [
+    "Heat the extra virgin olive oil in a large saucepan over a medium heat. Add the onion and sauté for around 5 minutes, until starting to soften. Add the garlic and cook for another 2 minutes.",
+    "Stir in the carrots and tomatoes and sauté for a further 2 minutes. Add the red lentils, tomato purée, stock, cayenne pepper and some salt and pepper. Simmer gently for 20 minutes, until the lentils and vegetables are tender.",
+    "Remove from the heat and allow to cool a little, then blend until smooth using a stick blender or food processor. Adjust the seasoning if needed, and warm through again before serving.",
+    "For piping-hot polpette, reheat them in the oven at 180°C fan for 10 minutes or in an air fryer at 180°C for 5-6 minutes.",
+    "Serve the soup, topped with warm polpette and a swirl of pesto."
+  ],
+  "notes": [
+    "Nutrition (per serving): Protein: 25g | Fibre: 15g | Plant Points: 7.25 | Gluten-Free, Vegan (GV)",
+    "This is one of the most popular soup recipes that I share in clinic. It's often the first recipe people choose when they join my programmes, and it's one I personally make on repeat. It's simple, comforting and easy to adapt. Here, I've paired it with the Red Lentil Polpette on page 176 to top up the protein and turn it into a more filling meal, but you can add any protein you choose to this soup. I also love it with pan-fried halloumi cubes, or simply finished with crumbled feta for a quick and nourishing lunch. See page 157 for more topping ideas.",
+    "Tip: Top up the protein further with a sprinkling of feta.",
+    "Storage: Store the soup and polpette separately in airtight containers in the fridge for up to 3 days. The soup is suitable for freezing for up to 3 months; defrost and reheat until piping hot."
+  ],
+  "tags": [
+    "lunch",
+    "soup"
+  ]
+}

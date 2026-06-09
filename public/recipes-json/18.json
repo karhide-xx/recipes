@@ -1,0 +1,171 @@
+{
+  "title": "Sticky Peanut Tofu Poke Bowl",
+  "serves": 4,
+  "image": "images/18.jpg",
+  "ingredients": {
+    "tofu": [
+      {
+        "amount": "280",
+        "unit": "g",
+        "ingredient": "firm, plain tofu"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "chickpea (gram) flour or cornflour"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "tamari or soy sauce"
+      },
+      {
+        "amount": "1",
+        "unit": "tsp",
+        "ingredient": "honey (or maple syrup)"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "toasted sesame oil"
+      },
+      {
+        "amount": "pinch",
+        "unit": "",
+        "ingredient": "chilli flakes"
+      }
+    ],
+    "salad": [
+      {
+        "amount": "100",
+        "unit": "g",
+        "ingredient": "dry quinoa (or 250g cooked quinoa)"
+      },
+      {
+        "amount": "100",
+        "unit": "g",
+        "ingredient": "frozen edamame beans"
+      },
+      {
+        "amount": "120",
+        "unit": "g",
+        "ingredient": "red or white cabbage (or mix)",
+        "note": "finely sliced"
+      },
+      {
+        "amount": "1",
+        "unit": "",
+        "ingredient": "red pepper",
+        "note": "diced"
+      },
+      {
+        "amount": "1",
+        "unit": "",
+        "ingredient": "yellow pepper",
+        "note": "diced"
+      },
+      {
+        "amount": "200",
+        "unit": "g",
+        "ingredient": "tomatoes",
+        "note": "chopped"
+      },
+      {
+        "amount": "2",
+        "unit": "",
+        "ingredient": "carrots",
+        "note": "grated or julienned"
+      },
+      {
+        "amount": "12",
+        "unit": "",
+        "ingredient": "radishes",
+        "note": "sliced"
+      },
+      {
+        "amount": "100",
+        "unit": "g",
+        "ingredient": "cucumber",
+        "note": "diced"
+      },
+      {
+        "amount": "1½",
+        "unit": "",
+        "ingredient": "avocado",
+        "note": "diced"
+      }
+    ],
+    "dressing": [
+      {
+        "amount": "100",
+        "unit": "g",
+        "ingredient": "peanut butter"
+      },
+      {
+        "amount": "2",
+        "unit": "tbsp",
+        "ingredient": "tamari or soy sauce"
+      },
+      {
+        "amount": "2",
+        "unit": "tbsp",
+        "ingredient": "apple cider vinegar"
+      },
+      {
+        "amount": "",
+        "unit": "juice of 1",
+        "ingredient": "lime"
+      },
+      {
+        "amount": "2",
+        "unit": "cloves",
+        "ingredient": "garlic",
+        "note": "crushed"
+      },
+      {
+        "amount": "20",
+        "unit": "g",
+        "ingredient": "fresh ginger",
+        "note": "peeled and finely grated"
+      },
+      {
+        "amount": "1",
+        "unit": "tbsp",
+        "ingredient": "toasted sesame oil"
+      },
+      {
+        "amount": "2",
+        "unit": "tbsp",
+        "ingredient": "sriracha sauce"
+      }
+    ],
+    "to_serve": [
+      {
+        "amount": "1",
+        "unit": "tsp",
+        "ingredient": "sesame seeds"
+      },
+      {
+        "amount": "",
+        "unit": "",
+        "ingredient": "chopped coriander"
+      }
+    ]
+  },
+  "instructions": [
+    "You can cook the tofu in the oven or in an air fryer. If using the oven, preheat to 180°C fan. Line a baking sheet with baking parchment.",
+    "Cut the tofu into bite-size squares and press them gently with a clean tea towel to remove the excess water. In a bowl, toss the tofu with the chickpea flour or cornflour, then add the tamari, honey, sesame oil and chilli flakes. Spread on the lined baking sheet and bake for 20-25 minutes, until golden and crisp outside and soft inside. Alternatively, cook in an air fryer at 180°C for 15 minutes.",
+    "Meanwhile, cook the quinoa in a pan of simmering water for 15 minutes. Add the frozen edamame for the last 4 minutes. Drain and rinse under cold water.",
+    "To make the dressing, combine all the ingredients in a food processor or use a stick blender. Add around 75ml of water and blend until smooth.",
+    "Serve the vegetables, quinoa and edamame with the tofu, coriander and a sprinkle of sesame seeds. Drizzle generously with the peanut dressing."
+  ],
+  "notes": [
+    "Nutrition (per serving): Protein: 30g | Fibre: 14g | Plant Points: 15.5 | Gluten-Free (G), Vegetarian/Vegan (Vg)",
+    "I don't think any cookbook is complete without a poke bowl! What I love about poke bowls is that there are no set rules. The word 'poke' is derived from a Hawaiian word meaning to slice or cut, so while a traditional poke bowl might contain raw fish and rice, as long as there is plenty of chopping involved, I think anything goes! This recipe uses all plant proteins, to show it is possible to reach 30g of protein using plant-based ingredients alone. The two most important elements in a poke bowl, for me, are colour and flavour. You can freestyle with the vegetables, or use what you already have in the fridge. Aim for around 200-250g of vegetables per person. The tofu can be swapped for halloumi if preferred.",
+    "Make-One-Take-One: Store the salad ingredients in an airtight container in the fridge for up to 3 days. Keep the dressing in a separate jar. Assemble just before serving."
+  ],
+  "tags": [
+    "lunch",
+    "salad"
+  ]
+}
